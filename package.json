@@ -1,0 +1,26 @@
+{
+  "name": "pruefungsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "cookie-parser": "^1.4.7",
+    "csv-parser": "^3.2.0",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "html-pdf-node": "^1.0.8",
+    "json2csv": "^6.0.0-alpha.2",
+    "multer": "^2.1.1",
+    "qrcode": "^1.5.4",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}

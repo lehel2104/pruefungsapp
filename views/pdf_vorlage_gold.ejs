@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Auswerteblatt GOLD - <%= t.vorname %> <%= t.name %></title>
+    <style>
+        @page { size: A4 landscape; margin: 10mm; }
+        body { font-family: "Arial", sans-serif; margin: 0; padding: 0; background-color: #fff; font-size: 8.5pt; -webkit-print-color-adjust: exact; }
+        .page { width: 277mm; height: 185mm; margin: 0 auto; background: white; padding: 5mm; box-sizing: border-box; position: relative; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .header-center { text-align: center; flex-grow: 1; }
+        .header-center h1 { font-size: 14pt; margin: 0; font-weight: normal; }
+        .header-center h2 { font-size: 26pt; margin: 0; font-weight: bold; }
+        .logo-img { height: 50px; object-fit: contain; }
+
+        /* Stammdaten */
+        .stammdaten-container { display: flex; align-items: flex-end; margin-bottom: 10px; gap: 10px; }
+        .abnahmestufe-wert { font-size: 22pt; font-weight: bold; margin-right: 10px; }
+        .input-grid { display: flex; flex-grow: 1; border: 1px solid black; }
+        .input-field { border-right: 1px solid black; height: 35px; position: relative; padding: 4px 8px; font-weight: bold; font-size: 10pt; flex: 1; }
+        .input-field:last-child { border-right: none; }
+        .label-sub { position: absolute; bottom: 2px; width: 100%; text-align: center; font-size: 7pt; font-weight: normal; left: 0; }
+
+        /* Sections */
+        .section-hint { font-size: 7.5pt; font-style: italic; margin: 2px 0; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-top: 5px; }
+        .underline { text-decoration: underline; font-size: 10pt; }
+        
+        .serie-container { display: flex; align-items: center; gap: 5px; }
+        .serie-box { border: 1px solid black; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16pt; font-weight: bold; }
+        .active-serie { background-color: #000 !important; color: #fff !important; }
+
+        /* Tabellen */
+        table { width: 100%; border-collapse: collapse; margin-top: 3px; }
+        td { border: 1px solid black; text-align: center; height: 17px; padding: 0; }
+        .row-label { width: 35px; font-weight: bold; background-color: #f8f8f8; }
+
+        .checkbox { width: 12px; height: 12px; border: 1px solid black; display: inline-block; vertical-align: middle; margin-right: 3px; text-align: center; line-height: 10px; }
+        .footer-line { position: absolute; bottom: 40px; width: calc(100% - 10mm); display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center; border-top: 1px solid black; padding-top: 4px; }
+        .meta-footer { position: absolute; bottom: 5mm; width: calc(100% - 10mm); display: flex; justify-content: space-between; font-size: 7pt; }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header">
+        <img src="image_ba6584.png" class="logo-img">
+        <div class="header-center">
+            <h1>Leistungsabzeichen der THW-Jugend</h1>
+            <h2>Auswerteblatt</h2>
+        </div>
+        <img src="image_ba6589.png" class="logo-img">
+    </div>
+
+    <div class="stammdaten-container">
+        <span>Abnahmestufe:</span>
+        <span class="abnahmestufe-wert">GOLD</span>
+        <div class="input-grid">
+            <div class="input-field" style="flex: 2.5;"><%= t.vorname %> <%= t.name %><div class="label-sub">Vorname Nachname (JH)</div></div>
+            <div class="input-field"><div class="label-sub">Geburtsdatum</div></div>
+            <div class="input-field" style="flex: 1.5;"><div class="label-sub">Ortsjugend / Ortsverband</div></div>
+        </div>
+    </div>
+
+    <div class="section-hint">⇩ von der Abnahmekommission auszufüllen ⇩</div>
+
+    <div class="section-header">
+        <span class="underline">Theoretische Aufgaben</span>
+        <div class="serie-container">
+            Serie: 
+            <% ['A','B','C','D'].forEach(s => { 
+                let isActive = (t.satz === s || t.satz === 'Satz ' + s);
+            %>
+                <div class="serie-box <%= isActive ? 'active-serie' : '' %>"><%= s %></div>
+            <% }) %>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <td class="row-label" style="border:none; background:none;"></td>
+            <% for(let i=1; i<=40; i++) { %><td style="width: 20px; font-size: 7pt;"><%= i %></td><% } %>
+            <td style="border:none; width: 70px;"></td>
+        </tr>
+        <tr><td class="row-label">A</td><% for(let i=1; i<=40; i++) { %><td></td><% } %><td rowspan="5" style="text-align: left; vertical-align: top; padding: 4px;">Summe:<br><br><b style="font-size:14pt"><%= t.anzahlTheoriePunkte %></b></td></tr>
+        <tr><td class="row-label">B</td><% for(let i=1; i<=40; i++) { %><td></td><% } %></tr>
+        <tr><td class="row-label">C</td><% for(let i=1; i<=40; i++) { %><td></td><% } %></tr>
+        <tr><td class="row-label">D</td><% for(let i=1; i<=40; i++) { %><td></td><% } %></tr>
+        <tr>
+            <td class="row-label">✓ / -</td>
+            <% 
+                let thList = []; try { thList = JSON.parse(t.theorieDetails || '[]'); } catch(e) {}
+                for(let i=1; i<=40; i++) { 
+                    let frage = thList.find(f => f.n == i);
+                    let sym = frage ? (frage.r ? '✓' : '-') : '';
+            %><td><%= sym %></td><% } %>
+        </tr>
+    </table>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+        <div style="font-size: 8pt;">
+            ✓ = richtig &nbsp; - = falsch <br>
+            Die Theorie ist: &nbsp; <div class="checkbox"><%= t.theorieBestanden ? 'X' : '' %></div> bestanden &nbsp; <div class="checkbox"><%= (!t.theorieBestanden && t.hatTheorie) ? 'X' : '' %></div> nicht bestanden
+        </div>
+        <div style="text-align: right; font-size: 8pt;">Die theoretischen Aufgaben sind bestanden, wenn mindestens 32 Fragen richtig beantwortet wurden.</div>
+    </div>
+
+    <hr style="margin: 8px 0; border: 0; border-top: 1px solid #000;">
+
+    <div class="section-hint">⇩ von der Abnahmekommission auszufüllen ⇩</div>
+    <div class="section-header">
+        <span class="underline">Praktische Aufgaben</span>
+        <div class="serie-container">
+            Serie: 
+            <div class="serie-box active-serie">A</div><div class="serie-box">B</div><div class="serie-box">C</div>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 5px;">
+        <table style="width: 72%;">
+            <tr><td style="width: 65px; border:none"></td><% for(let i=1; i<=24; i++) { %><td style="font-size: 7pt;"><%= i %></td><% } %><td>Summe:</td></tr>
+            <% 
+                let praxis = []; 
+                t.stationenDetails.forEach(s => { if(!s.nummer.includes('G')) s.details.forEach(d => praxis.push(d)); });
+            %>
+            <tr>
+                <td class="row-label" style="text-align: left; padding-left: 3px;">richtig ✓</td>
+                <% for(let i=0; i<24; i++) { %><td><%= (praxis[i] && praxis[i].status === 'bestanden') ? '✓' : '' %></td><% } %>
+                <td rowspan="2" style="font-size: 14pt; font-weight: bold;"><%= t.anzahlBestanden %></td>
+            </tr>
+            <tr>
+                <td class="row-label" style="text-align: left; padding-left: 3px;">falsch -</td>
+                <% for(let i=0; i<24; i++) { %><td><%= (praxis[i] && praxis[i].status === 'nicht_bestanden') ? '-' : '' %></td><% } %>
+            </tr>
+        </table>
+
+        <div style="flex: 1;">
+            <div class="underline" style="font-size: 8pt;">Gruppenaufgabe</div>
+            <table style="margin-top: 2px;">
+                <tr><td style="font-size: 7pt;">1</td><td style="font-size: 7pt;">2</td><td style="font-size: 7pt;">3</td><td>Summe:</td></tr>
+                <tr style="height: 22px;"><td></td><td></td><td></td><td></td></tr>
+            </table>
+            <div style="font-size: 7pt;">mind. 2 von 3</div>
+        </div>
+        <div style="flex: 1;">
+            <div class="underline" style="font-size: 8pt;">Gemeinschaftsprojekt</div>
+            <table style="margin-top: 2px;">
+                <tr><td style="font-size: 7pt;">1</td><td style="font-size: 7pt;">2</td><td>Summe:</td></tr>
+                <tr style="height: 22px;"><td></td><td></td><td></td></tr>
+            </table>
+            <div style="font-size: 7pt;">beide Teile</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 5px; display: flex; justify-content: space-between; font-size: 8.5pt;">
+        <div>
+            Die praktischen Aufgaben sind bestanden, wenn mindestens 20 Aufgaben richtig gelöst wurden.<br>
+            Die Praxis ist: &nbsp; <div class="checkbox"><%= t.praxisBestanden ? 'X' : '' %></div> bestanden &nbsp; <div class="checkbox"><%= (t.istFertig && !t.praxisBestanden) ? 'X' : '' %></div> nicht bestanden
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <div><div class="checkbox"></div> bestanden<br><div class="checkbox"></div> nicht bestanden</div>
+            <div><div class="checkbox"></div> bestanden<br><div class="checkbox"></div> nicht bestanden</div>
+        </div>
+    </div>
+
+    <div class="footer-line">
+        <div><%= new Date().toLocaleDateString('de-DE') %> / Abnahmeort</div>
+        <div>Datum</div>
+        <div>Leiter_in der Abnahme (Unterschrift)</div>
+    </div>
+
+    <div class="meta-footer">
+        <span>Auswerteblatt für die Abnahme des Leistungsabzeichens der THW-Jugend</span>
+        <span>ID: #<%= t.id %> | Stand: 30.09.2020</span>
+    </div>
+</div>
+
+</body>
+</html>

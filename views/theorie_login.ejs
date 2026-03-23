@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theorie Anmeldung | THW Slate</title>
+    <style>
+        :root {
+            --thw-blue: #003399; /* Das offizielle THW-Blau */
+            --thw-yellow: #FFCC00; /* Das offizielle THW-Gelb */
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            color: #f8fafc; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+
+        .login-card { 
+            background: var(--slate-800); 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            border: 1px solid var(--slate-700); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center; 
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Subtiler Hover-Effekt für die Karte */
+        .login-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--thw-blue);
+        }
+
+        h1 { 
+            color: var(--thw-yellow); 
+            font-size: 1.8rem; 
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            margin-left: 4px;
+        }
+
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            box-sizing: border-box;
+            border-radius: 8px; 
+            border: 2px solid var(--slate-700); 
+            background: var(--slate-900); 
+            color: white; 
+            font-size: 1.1rem; 
+            text-align: center; 
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus { 
+            border-color: var(--thw-blue);
+            box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.2);
+        }
+
+        /* Entfernt die kleinen Pfeile bei Number-Inputs */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        button { 
+            background: var(--thw-blue); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 1rem;
+            width: 100%; 
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover { 
+            background: #0044cc;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h1>Theorie-Test</h1>
+        <p>Prüfungsportal der Basisausbildung</p>
+        
+        <form action="/theorie/anmelden" method="POST">
+            <div class="input-group">
+                <label for="id-input">Teilnehmer-Identifikationsnummer</label>
+                <input 
+                    type="number" 
+                    id="id-input"
+                    name="teilnehmer_id" 
+                    placeholder="z.B. 101" 
+                    required 
+                    autofocus
+                >
+            </div>
+            
+            <button type="submit">Prüfung starten</button>
+        </form>
+
+        <div class="footer-note">
+            THW Slate &bull; Sicherer Prüfungsmodus
+        </div>
+    </div>
+
+</body>
+</html>

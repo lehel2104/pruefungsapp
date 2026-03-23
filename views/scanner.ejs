@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Station Scan | THW-Jugend LAZ</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg-deep: #0f172a;
+            --bg-card: #1e293b;
+            --thw-blue: #2563eb;
+            --thw-yellow: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --radius: 20px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--thw-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Scanner Area */
+        .scanner-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #reader {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--radius) !important;
+            overflow: hidden;
+            border: 2px solid var(--border) !important;
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Styling für die html5-qrcode Library Internals */
+        #reader__dashboard { padding: 10px !important; }
+        #reader__camera_selection { 
+            background: var(--bg-input); 
+            color: white; 
+            padding: 8px; 
+            border-radius: 8px; 
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button#html5-qrcode-button-camera-start, 
+        button#html5-qrcode-button-camera-stop {
+            background: var(--thw-blue) !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px 20px !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--thw-yellow);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Manual Input Section */
+        .manual-section {
+            background: var(--bg-card);
+            padding: 30px 20px 40px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .manual-section p {
+            margin: 0 0 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input {
+            flex: 1;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: bold;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--thw-blue); }
+
+        .go-btn {
+            background: var(--bg-input);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .go-btn:hover { background: var(--thw-blue); }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span>Stations-Scan</span>
+        <h1>Station <%= station %></h1>
+    </div>
+
+    <div class="scanner-container">
+        <div id="reader"></div>
+        <div class="status-text">
+            <div class="pulse-icon"></div>
+            <span>Warte auf QR-Code Scan...</span>
+        </div>
+    </div>
+
+    <div class="manual-section">
+        <p>Kamera Probleme? ID manuell eingeben:</p>
+        <div class="input-group">
+            <input type="number" id="manualId" placeholder="z.B. 1" inputmode="numeric">
+            <button class="go-btn" onclick="goManual()">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const stationName = "<%= station %>";
+
+        function onScanSuccess(decodedText) {
+            // Kurzes haptisches Feedback (wenn vom Handy unterstützt)
+            if (navigator.vibrate) navigator.vibrate(100);
+            
+            // Sofortige Weiterleitung
+            window.location.href = `/pruefen/${stationName}/${decodedText}`;
+        }
+
+        // Scanner Konfiguration für Handys optimiert
+        let html5QrcodeScanner = new Html5QrcodeScanner("reader", { 
+            fps: 15, // Etwas flüssiger für moderne Handys
+            qrbox: { width: 250, height: 250 },
+            aspectRatio: 1.0, // Quadratischer Feed wirkt sauberer
+            showTorchButtonIfSupported: true // Wichtig für dunkle Hallen!
+        });
+        
+        html5QrcodeScanner.render(onScanSuccess, (err) => {
+            // Fehler während des Suchens ignorieren
+        });
+
+        function goManual() {
+            const id = document.getElementById('manualId').value;
+            if(id) {
+                window.location.href = `/pruefen/${stationName}/${id}`;
+            } else {
+                alert("Bitte eine Teilnehmer-ID eingeben.");
+            }
+        }
+    </script>
+</body>
+</html>

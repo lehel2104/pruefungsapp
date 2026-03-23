@@ -1,0 +1,190 @@
+﻿abzeichen;satz;station;aufgabe_id;aufgabe;Name;Frage 1;Frage 2 ;Frage 3;Frage 4;Frage 5;Frage 6;Frage 7;Frage 8;Frage 9;Frage 10;Frage 11;min_punkte
+Orange;A;1;1;1;Binden eines Mastwurfs an einem Rundholz;Mastwurf richtig gebunden*;Mastwurf durch Halbschlag gesichert*;Überhang des freien Leinenendes hat mindestens 10 x Leinendurchmesser;;;;;;;;;2
+Orange;A;2;2;2;Absetzen eines Notrufs;Wer meldet;Wo*;Was*;Wie viele Verletzte;Warten*;welche Verletzungen;;;;;;5
+Orange;A;3;3;3;Fachgerechtes Einschlagen von Nägeln;"Arbeitsschutzhandschuhe zum
+Festhalten der Nägel angezogen*";Hammer am Ende des Stiels gehalten*;Nägel vollständig eingeschlagen;Nägel gerade eingeschlagen;;;;;;;;3
+Orange;B;1;4;1;Aussteigen Kfz;Auf Kommando „Absitzen“ gewartet *;Nicht aus dem Auto gesprungen*;Rückwärts ausgestiegen*;Trittbrett benutzt ;Auf Verkehr geachtet ;PSA auf Vollständigkeit geprüft?;;;;;;4
+Orange;B;2;5;2;Gerätemerken;Steckleiter ;Bohrmaschine ;Kneifzange ;Teleskop-Dreibeinstativ ;Hebekissen ;Vorschlaghammer benannt? ;;;;;;4
+Orange;B;3;6;3;Pflaster aufkleben;Richtige Wahl der Handschuhe*;Wundauflage nicht verunreinigt*;Wunde vollständig abgedeckt*;Infektionsschutzhandschuhe entsorgt ;-;Verletzten beruhigt/angesprochen?;;;;;;3
+Orange;C;1;7;1;Fehlersuchbild;Helm fehlt*;Handschuhe fehlen ;Essen an Einsatzstelle*;Einsatzstiefel fehlen*;Handy-Nutzung*;Leitersicherung fehlt?*;;;;;;5
+Orange;C;2;8;2;Zahnkranz schneiden;Entlang der Linien geschnitten*;Schere sicher übergeben (Klinge gefasst) ;-;-;-;Scheren-Sicherung/Schluss beachtet?;;;;;;1
+Orange;C;3;9;3;Schraubenmännchen;Nach Muster zusammengebaut*;Alle Teile verwendet ;Maximal zwei Versuche gebraucht ;-;-;Sicherer Stand der Figur erreicht?;;;;;;2
+Blau;A;1;10;1;Nägel in T-Form einschlagen;Handschuh angezogen* ;Sitz des Hammerstiels geprüft*;Freier Arbeitsraum ;Buchstabe „T“ erkennbar*;Nägel zu 2/3 drin*;Nägel gerade ;;;;;;4
+Blau;A;2;11;2;Verhalten an Unfallstelle;Warnweste angelegt*;Notruf abgesetzt*;Hinter Leitplanke aufhalten*;-;-;-;;;;;;3
+Blau;A;3;12;3;UTM-Legendenzeichen;Polizei benennen ;Kirche benennen ;Krankenhaus benennen ;Bahnhof benennen ;-;-;;;;;;3
+Blau;A;4;13;4;Schrauben bestücken;Schraube 1 (max. 3 Versuche)*;Schraube 2*;Schraube 3*;Schraube 4 ;Schraube 5 ;Schraube 6 ;;;;;;5
+Blau;A;5;14;5;Flucht-/Hinweisschilder;Sammelplatz*;Feuerlöscher ;Durchgang verboten*;Helmpflicht ;Notausgang*;-;;;;;;3
+Blau;B;1;15;1;Mastwurf an Rundholz;Mastwurf richtig gebunden*;Durch Halbschlag gesichert*;Überhang min. 10x Leinendurchmesser ;-;-;-;;;;;;2
+Blau;B;2;16;2;Nägel in T-Form einschlagen;Handschuh angezogen* ;Sitz des Hammerstiels geprüft*;Freier Arbeitsraum ;Buchstabe „T“ erkennbar*;Nägel zu 2/3 drin*;Nägel gerade ;;;;;;4
+Blau;B;3;17;3;Kanthölzer kreuzen;Kanthölzer gekreuzt*;Mit Gewindestange verbunden*;Unterlegscheiben verwendet ;Muttern festgezogen ;-;-;;;;;;3
+Blau;B;4;18;4;Flucht-/Hinweisschilder;Sammelplatz*;Feuerlöscher ;Durchgang verboten*;Helmpflicht ;Notausgang*;-;;;;;;3
+Blau;B;5;19;5;Schrauben bestücken;Schraube 1*;Schraube 2*;Schraube 3*;Schraube 4 ;Schraube 5 ;Schraube 6 ;;;;;;5
+Blau;C;1;20;1;Mastwurf an Rundholz;Mastwurf richtig gebunden*;Durch Halbschlag gesichert*;Überhang min. 10x Leinendurchmesser ;-;-;-;;;;;;2
+Blau;C;2;21;2;Schraube eindrehen;Passenden Schraubendreher gewählt* ;Vollständig eingedreht*;Ohne Hammer eingedreht ;-;-;-;;;;;;2
+Blau;C;3;22;3;Zahnkranz aussägen;Vorlage aufgezeichnet ;Handschuh an passender Hand*;Laubsäge gewählt ;Zahnkranz erkennbar ausgesägt ;-;-;;;;;;3
+Blau;C;4;23;4;Notruf absetzen;Wer meldet ;Wo*;Was*;Wie viele Verletzte ;Warten auf Rückfragen*;Welche Verletzungen ;;;;;;5
+Blau;C;5;24;5;Verhalten an Unfallstelle;Warnweste angelegt*;Notruf abgesetzt*;Hinter Leitplanke aufhalten*;-;-;-;;;;;;3
+Bronze;A;1;25;1;Aufschießen einer Arbeitsleine;Freies Ende etwas kürzer als normaler Schlag ;Drallfrei aufgeschossen ;Mind. 3 Schläge quer umwickelt ;Schläge eng und fest ;Überstand mind. 10x Leinendurchmesser ;;;;;;;4
+Bronze;A;1;26;2;Binden einfacher Ankerstich;„Verloren fest“ um Rundholz gelegt*;Ankerstich richtig ausgeführt*;Halber Schlag zur Sicherung vorhanden ;-;-;;;;;;;2
+Bronze;A;2;27;3;Bestandteile einer Leiter;Holm benannt*;Sprosse benannt *;Kopfende benannt *;Fußende benannt *;Federsperrbolzen erklärt ;;;;;;;4
+Bronze;A;2;28;4;Aufrichten einer Steckleiter;Helfer für Fußpunktsicherung angewiesen *;Über Sprosse aufgerichtet und angelegt *;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;-;-;;;;;;;3
+Bronze;A;2;29;5;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Helfer zur Leitersicherung herangezogen *;An Sprossen festgehalten (nicht Holm) *;-;-;;;;;;;3
+Bronze;A;3;30;6;Holzbearbeitungswerkzeuge;Zugmesser / Lochbeitel benannt ;Schreinerklüpfel / Raspel benannt ;Stichling / Schlangenbohrer benannt ;Latthammer benannt ;Fuchsschwanz / Schlegel benannt ;;;;;;;7
+Bronze;A;3;31;7;Bestandteile PSA;Stiefel benannt *;Hose benannt *;Jacke benannt *;Arbeitsschutzhandschuhe benannt *;Schutzhelm benannt *;;;;;;;5
+Bronze;A;3;32;8;Absetzen eines Notrufs;Wer meldet? ;Wo? *;Was? *;Warten auf Rückfragen *;Wie viele Verletzte / Welche Verletzungen ;;;;;;;5
+Bronze;B;1;33;1;Aufschießen einer Arbeitsleine;Freies Ende etwas kürzer als normaler Schlag ;Drallfrei aufgeschossen ;Mind. 3 Schläge quer umwickelt ;Schläge eng und fest ;Überstand mind. 10x Leinendurchmesser ;;;;;;;4
+Bronze;B;1;34;2;Bestandteile PSA;Stiefel benannt* ;Hose bennant*;Jacke benannt *;Arbeitsschutzhandschuhe benannt *;Schutzhelm benannt *;;;;;;;5
+Bronze;B;1;35;3;Zuordnen von Löschmitteln;Elektroanlagen: Kohlendioxidlöscher*;Holz: Wasser*;Metallspäne: Sand*;Kraftstoffe: ABC-Pulver*;-;;;;;;;4
+Bronze;B;2;36;4;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Helfer zur Leitersicherung herangezogen *;An Sprossen festgehalten (nicht Holm) *;-;-;;;;;;;3
+Bronze;B;2;37;5;Tragen Steckleiterteil;Liegt auf Schulter auf *;An Sprosse gehalten *;Zweite Hand bleibt frei *;-;-;;;;;;;3
+Bronze;B;3;38;6;Holzbearbeitungswerkzeuge;Bügelsäge / Fuchsschwanz benannt ;Stichsäge / Lochbeitel benannt ;Handbeil / Holzaxt benannt ;Kistenbeitel benannt ;Zugmesser benannt ;;;;;;;6
+Bronze;B;3;39;7;Ablängen Kantholz;Arbeitsschutzhandschuhe getragen *;Führungsholz für Anschnitt verwendet *;Sägeblattlänge voll ausgenutzt ;Schnitt gerade und rechtwinklig ;-;;;;;;;3
+Bronze;B;3;40;8;Dienststellungskennzeichen;Ortsbeauftragte/r erkannt ;Zugführer/in erkannt ;Gruppenführer/in erkannt ;Helfer/in erkannt ;Ausbildungsbeauftragte/r erkannt ;;;;;;;4
+Bronze;C;1;41;1;Herstellen Bockschnürbund;Beginn mit Mastwurf an tragendem Holz *;Leinenüberhang mind. 10x Durchmesser ;Eng und fest gebunden *;Entgegen Lastrichtung (nach oben) gebunden *;Abschluss mit Mastwurf an waagerechtem Holz ;;;;;;;4
+Bronze;C;1;42;2;Bestandteile PSA;Stiefel benannt *;Hose benannt *;Jacke benannt *;Arbeitsschutzhandschuhe benannt *;Schutzhelm benannt *;;;;;;;5
+Bronze;C;2;43;3;Bestandteile einer Leiter;Holm benannt *;Sprosse benannt *;Kopfende benannt *;Fußende benannt *;Federsperrbolzen erklärt ;;;;;;;4
+Bronze;C;2;44;4;Zusammenstecken Steckleiter;Arbeitsschutzhandschuhe getragen ;Leiterteile ineinander geschoben *;Federsperrbolzen vor Zugprobe geschlossen *;Zugprobe durchgeführt *;-;;;;;;;3
+Bronze;C;2;45;5;Holzbearbeitungswerkzeuge;Zugmesser / Lochbeitel benannt ;Schreinerklüpfel / Raspel benannt ;Stichling / Schlangenbohrer benannt ;Latthammer benannt ;Fuchsschwanz / Schlegel benannt ;;;;;;;7
+Bronze;C;2;46;6;Ablängen Gewindestange;Mit Gewindeschutz im Schraubstock *;Auf Maß abgelängt *;Schnitt rechtwinklig ;Schnittfläche geebnet und entgratet *;Auf Gewindegängigkeit geprüft *;;;;;;;4
+Bronze;C;3;47;7;Transportsicherung Krankentrage;Hüft- und Brustgurt geschlossen *;Leinen mit Doppelstich verbunden *;Kopfseite: Mastwurf + Halbschlag *;Leinenführung fest am Körper *;"Arbeitsleine fußseitig mit Halbschlag
+an den Tragegriffen und
+Tragbeinen gesichert (beidseitig)*";Achterschlag an den Füßen*;"Person in der Einbindungszeit
+betreut, Handgriffe erklärt und
+angesprochen*";;;;;7
+Bronze;C;3;48;8;Zuordnen von Löschmitteln;Elektroanlagen-Kohlendioxidlöscher*;Holz: Wasser *;Metallspäne: Sand *;Kraftstoffe: ABC-Pulver *;-;;;;;;;4
+Silber;A;1;49;1;Aufschießen einer Arbeitsleine;Freies Leinenende kürzer als Schlag;Drallfrei aufgeschossen;Mind. 3 Schläge quer umwickelt;Schläge eng und fest;Überstand mind. 10x Leinendurchmesser;-;-;;;;;4
+Silber;A;1;50;2;Ankerstich an Rundholz;"""Verloren fest"" um Rundholz gelegt*";Ankerstich richtig ausgeführt*;-;-;-;-;-;;;;;2
+Silber;A;1;51;3;Handhabung ABC-Feuerlöscher;Sicherung entfernt*;Treibgasbehälter ausgelöst*;Brand gebückt angegangen*;Windrichtung/Abstand beachtet*;Löschstrahl in Flammen (nicht Rauch)*;Kurze Pulverstöße;-;;;;;5
+Silber;A;2;52;4;Bestandteile einer Leiter;Holm*;Sprosse*;Kopfende*;Fußende (Leiterfuß)*;Federsperrbolzen;-;-;;;;;4
+Silber;A;2;53;5;Aufrichten einer Steckleiter;Helfer für Fußpunktsicherung angewiesen*;Über Sprosse aufgerichtet/angelegt*;Anstellwinkel überprüft und ggf. korrigiert (65-75grad)*;-;-;-;-;;;;;3
+Silber;A;2;54;6;Leitersicherungen aufzählen;Kopfpunktsicherung;Querriegel;Fußpunktsicherung;2. Junghelfer;Eingraben;Pfähle / Spitzeisen;-;;;;;4
+Silber;A;2;55;7;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Helfer zur Sicherung herangezogen*;An Sprossen festgehalten (nicht Holm)*;-;-;-;-;;;;;3
+Silber;A;3;56;8;Hilfsmittel Kartenkunde;Karte(n)*;Planzeiger;Kompass;GPS-Empfänger;-;-;-;;;;;3
+Silber;A;3;57;9;Punkt bestimmen (Koordinate);Punkt richtig bestimmt*;-;-;-;-;-;-;;;;;1
+Silber;A;3;58;10;Absetzen eines Notrufs;Wer meldet;Wo*;Was*;Wie viele Verletzte;Warten*;Welche Verletzungen;-;;;;;5
+Silber;A;3;59;11;Fingerkuppenverband;Handschuhe getragen;Wundschnellverband geschnitten (6-8cm)*;Keilförmig eingeschnitten*;Schutzfolie ohne Berührung abgezogen*;Bis zur Hälfte um Finger geklebt*;Überstehende Hälfte fixiert*;-;;;;;5
+Silber;A;4;60;12;Werkzeuge Holzbearbeitung;Zugmesser;Lochbeitel;Schreinerklüpfel;Halbrund-Raspel;Bohrsäge;Stangen-Schlangenbohrer;Latthammer, Fuchsschwanz, Schlegel;;;;;7
+Silber;A;4;61;13;Mess-/Anreißwerkzeuge Holz;Gliedermaßstab;Zimmermannswinkel;Bandmaß;Stellwinkel (Schmiege);Wasserwaage;-;-;;;;;4
+Silber;A;4;62;14;Bestandteile Schutzausstattung;Stiefel*;Hose*;Jacke*;Arbeitsschutzhandschuhe*;Schutzhelm*;Fleece-Jacke;BaseCap;Koppel;;;;5
+Silber;A;4;63;15;Herstellen einer Schocklage;Mit Verletztem gesprochen/betreut;Hingelegt, Beine hoch gelagert*;Decke untergelegt;Verletzten zugedeckt;Vitalzeichen geprüft*;-;-;;;;;3
+Silber;B;1;64;1;Sackstich (2 Leinen);Sackstich richtig ausgeführt*;Überhang mind. 10x Leinendurchmesser;Parallele Leinenführung;-;-;-;-;;;;;2
+Silber;B;1;65;2;Aufschießen einer Arbeitsleine;Freies Leinenende kürzer als Schlag;Drallfrei aufgeschossen;Mind. 3 Schläge quer;Schläge eng und fest;Überstand mind. 10x Durchmesser;-;-;;;;;4
+Silber;B;1;66;3;Ketten mit Schäkel verbinden;Drallfrei ausgelegt*;Mit Schäkel verbunden*;Bolzen voll eingedreht;Bolzen halbe Umdrehung zurück*;Gegen Herausdrehen gesichert*;Handschuhe getragen*;-;;;;;5
+Silber;B;1;67;4;Bestandteile Schutzausstattung;Stiefel*;Hose*;Jacke*;Arbeitsschutzhandschuhe*;Schutzhelm*;Fleece-Jacke;BaseCap;Koppel;;;;5
+Silber;B;1;68;5;Zuordnen von Löschmitteln;Elektro: Kohlendioxid*;Holz: Wasser*;Metallspäne: Sand*;Kraftstoffe: ABC-Pulver*;-;-;-;;;;;4
+Silber;B;2;69;6;Aufzählung möglicher Leitersicherungen;Querriegel;2.Junghelfer_in;Eingraben;Pfähle / Sspitzeisen;Querriegel;;;;;;;4
+Silber;B;2;70;7;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Stationshelfer_in zur Leistersicherung geholt*;An Sprossen festgehalten (nicht Holm) *;;;;;;;;;3
+Silber;B;2;71;8;Steckleiterteil auf Schulter;Liegt auf Schulter auf*;An Sprosse gehalten*;Zweite Hand bleibt frei;-;-;-;-;;;;;3
+Silber;B;3;72;9;Zeigen von Werkzeugen für die Holzbearbeitung;Bügelsäge;Fuchsschwanz ;Stichsäge ;Lochbeitel ;Handbeil ;Holzaxt ;Kistenbeitel ;Zugmesser ;;;;6
+Silber;B;3;73;10;Zeigen von Mess und Anreißwerkzeugen;Gliedermaßstab;Zimmermannswinkel;Bandmaß;Stellwinkel (Schmiege);Wasserwage;;;;;;;4
+Silber;B;3;74;11;Ablängen Kantholz (Fuchsschwanz);Handschuhe getragen*;Führungsholz verwendet*;Sägeblattlänge voll ausgenutzt;Schnitt gerade/rechtwinklig;-;-;-;;;;;3
+Silber;B;4;75;12;Werkzeuge Steinbearbeitung;Maurerbeil;Gipserbeil;Handschutz;Spitzmeißel;Fäustel;Kneifzange;Schraubenschlüssel;Flachmeißel ;;;;6
+Silber;B;4;76;13;Erklärung der Handhabung des ABC-Feuerlöschers;Sicherung entfernt*;Treibgasbehälter ausgelöst*;Brand gebückt angegangen*;Windrichtung/Abstand beachtet*;Löschstrahl in Flammen (nicht Rauch)*;Löschangriff mit kurzen Pulverstößen;;;;;;5
+Silber;B;4;77;14;Aufzählen der Hilfsmittel der Kartenkunde;Karte(n)*;Planzeiger;Kompass;GPS-Empfänger;;;;;;;;2
+Silber;B;4;78;15;Bestimmen eines Punktes durch Vorgabe (Koordinate);Punkt richtig bestimmt*;-;-;-;-;-;-;;;;;1
+Silber;C;1;79;1;Bockschnürbund;Mit Mastwurf begonnen*;Überhang mind. 10x Durchmesser;Eng und fest gebunden*;Nach oben (gegen Last) gebunden*;Abschluss mit Mastwurf;-;-;;;;;4
+Silber;C;1;80;2;Bennenen dder Bestandteile der PSA;Stifel*;Hose*;Jacke*;Arbeirsschutzhandschuhe*;Schutzhelm*;Flece-Jacke;BaseCap ;Koppel ;;;;5
+Silber;C;1;81;3;Bestimmen eines Punktes durch Vorgabe (Koordinate);Punkt richtig bestimmt*;-;-;-;-;-;-;-;;;;1
+Silber;C;2;82;4;Steckleiterteile zusammenstecken;Handschuhe getragen;Ineinander geschoben*;Vor Zugprobe Sperrbolzen geprüft*;Zugprobe durchgeführt*;-;-;-;;;;;3
+Silber;C;2;83;5;Bennenen von Werkzeugen für die Holzbearbeitung;Zugmesser;Lochbeitel ;Schreinerklüpfel;Halbrund-Raspel;Bohrsäge;Stangen-Schlangenbohrer;Latthammer ;Fuchsschwanz ;Schlegel ;;;7
+Silber;C;2;84;6;Kreuzen von Kanthölzern;Löcher mittig angerissen*;Rechtwinklig gebohrt*;Mit Gewindestange verbunden*;Unterlegscheiben verwendet*;Muttern festgezogen;-;-;;;;;4
+Silber;C;2;85;7;Gewindestange ablängen (Metall);Mit Gewindeschutz eingespannt*;Auf Maß abgelängt*;Schnitt rechtwinklig;Geebnet und entgratet*;Gewindegängigkeit geprüft*;-;-;;;;;4
+Silber;C;3;86;8;Schläuche über Verkehrsweg;Drall- und knickfrei verlegt*;Schlauchbrücken verwendet*;Mit Leitkegeln gesichert*;Sicherungsposten eingeteilt;-;-;-;;;;;3
+Silber;C;3;87;9;Transportsicherung Krankentrage;Hüft- und Brustgurt zu*;Leinen mit Doppelstich verbunden*;Kopfseitig Mastwurf/Halbschlag*;Leinenführung fest am Körper*;Fußseitig Halbschläge*;Achterschlag an Füßen*;Person betreut/angesprochen*;;;;;7
+Silber;C;3;88;10;Druckverband;Handschuhe getragen;Wundauflage aufgelegt*;Mit 2-3 Gängen fixiert*;Druckpolster aufgelegt*;Weitere Bindegänge über Polster*;Bindenende fixiert*;-;;;;;5
+Silber;C;4;89;11;Stromversorgung/Beleuchtung;Stativbeine max. gespreizt/lotrecht*;Flutlicht aufgesteckt/gesichert*;Teleskoprohre max. Höhe*;Handschuhe beim Ausziehen*;Dreiseitig abgespannt*;Abspannseile mit Flatterband markiert;Leitung auf beschädigungen geprüft;Leitung vollständig abgerollt*;Überschüssige Leitung in Buchten gelegt*;Schutzdeckel/Schutzkappen verbunden;Vom Verbraucher zum Erzeuger aufgebaut;9
+Silber;C;4;90;12;Inbetriebnahme Stromerzeuger;Abgasschlauch angeschlossen*;Kraftstoff geprüft;Ölstand geprüft;Choke betätigt*;Kraftstoffhahn auf*;Motor gestartet*;Last erst bei Nenndrehzahl*;Schutzkappe an Aggregat verriegelt;Die Reihenfolge eingehalten*;;;7
+Silber;C;5;91;13;Verbinden zweier Kettenenden mit einem Schäkel;Kettenstränge drallfrei ausgelegt*;Kettenenden mit Schäkel verbunden*;Schäkelbolzen vollständig eingedreht;Schäkelbolzen eine halbe umdrehung zurückgedreht*;Schäkelbolzen gegen herausdrehen gesichert*;Handschuhe getragen*;-;-;-;;;5
+Silber;C;5;92;14;Inbetriebnahme Zuggerät;Handschuhe getragen*;Festpunkt gewählt*;Schaltgriff eingerastet;Rückzughebel nach hinten;Seil eingeführt/durchgeschoben*;Schaltgriff gelöst;Sicherheitsabstände eingehalten*;Anschlagverbindungen des Drahtzugseils gesichert*;Hebelrohr ausgezogen und gesichert*;Hebelrohr aufgesteckt ;;8
+Silber;C;5;93;15;Außerbetriebnahme Zuggerät;Seil entspannt*;Rückzughebel betätigt*;Vom Festpunkt/Last gelöst;Schaltgriff eingerastet und zurückgezogen*;Seil herausgezogen;Schaltgriff gelöst;-;-;;;;4
+Gold;A;1;94;1;Leinen verbinden ;Sackstich korrekt *;Überhang mind. 10x Leinendurchmesser;Parallele Führung ;-;-;-;-;-;;;;2
+Gold;A;1;95;2;Leine aufschießen ;Ende kürzer als Schlag ;Drallfrei ;Min. 3 Querschläge ;Eng & fest gewickelt ;Überhang mind. 10x Leinendurchmesser;-;;;;;;4
+Gold;A;1;96;3;Binden von Ankerstich an Rundholz;"""Verloren fest"" um Rundholz gelegt*";Ankerstich richtig*;-;-;-;;;;;;;2
+Gold;A;1;97;4;Ketten & Schäkel ;Drallfrei ausgelegt *;Mit Schäkel verbunden *;Bolzen voll eingedreht ;1/2 Drehung zurück *;Gegen Herausdrehen gesichert *;Handschuhe getragen *;;;;;;5
+Gold;A;1;98;5;ABC-Feuerlöscher ;Sicherung entfernt *;Treibgas ausgelöst *;Brand gebückt angegangen *;Wind/Abstand beachtet *;In Flammen gerichtet *;Kurze Pulverstöße ;;;;;;5
+Gold;A;2;99;6;Erklären der Bestandteile einer Leiter;Holm*;Sprosse*;Kopfende*;Fußende*;Federspeerbolzen;;;;;;;4
+Gold;A;2;100;7;Aufrichten einer Steckleiter über Sprosse;Helfer zum Fußpunkt oder Hilfe zur Aufrichtung hinzugezogen*;Leiter gesichert über Sprosse*;Anstellwinkel überprüft und ggf. korrigiert (65-75grad)*;;;;;;;;;3
+Gold;A;2;101;8;Leitersicherungen ;Querriegel;2.Junghelfer_in;Eingraben;Pfähle / Spitzeisen;Querriegel;;;;;;;4
+Gold;A;2;102;9;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Stationshelfer_in zur Leistersicherung geholt*;An Sprossen festgehalten (nicht Holm) *;-;-;;;;;;;3
+Gold;A;2;103;10;Tragen einer Steckleiter auf der Schulter;Leiterteil liegt auf Schulter auf*;Steckleiterteil an Sprosse gehalten*;Zweite Hand bleibt frei*;-;-;;;;;;;3
+Gold;A;3;104;11;Aufzählen der Hilfsmittel der Kartenkunde;Karte(n)*;Planzeiger;Kompass;GPS-Empfänger;-;;;;;;;3
+Gold;A;3;105;12;Bestimmen eines Punktes durch Vorgabe (Koordinate);Punkt richtig bestimmt*;-;-;;;;;;;;;1
+Gold;A;3;106;13;Erklären und Funktionsweise eines Kompasses;Metallnadel frei gelagert*;Metallnadel reagiert auf Magnetfeld*;Skala Himmelsrichtung auf metallnadel ausgerichtet*;Mögliche Störquellen gennant;;;;;;;;3
+Gold;A;3;107;14;Notruf absetzen ;Wer meldet ;Wo*;Was*;Wie viele Verletzte ;Warten auf Rückfragen*;Welche Verletzungen ;;;;;;5
+Gold;A;3;108;15;Fingerkuppenverband ;Handschuhe getragen ;Pflaster (6-8cm) *;Keile geschnitten*;Folie ohne Berühren ab *;Halbe um Finger *;Kuppe fixiert *;;;;;;5
+Gold;A;4;109;16;Dienststellung ;Ortsbeauftragte_r ;Zugführer_in ;Gruppenführer_in ;Ortsjugend/Verwaltung ;Ausbildungsbeauftr. ;Helfer_in ;;;;;;4
+Gold;A;4;110;17;Holz-Werkzeuge ;Zugmesser ;Lochbeitel ;Schreinerklüpfel ;Halbrund-Raspel ;Stichling ;Schlangenbohrer ;Latthammer ;Fuchsschwanz ;Schlegel ;;;7
+Gold;A;4;111;18;Gliedermaßstab;Zimmermannswinkel;Bandmaß;Stellwinkel(Schmiege);Wasserwage;;;;;;;;4
+Gold;A;4;112;19;Bezeichnungen am Wasser;Jenseits;Diesseits;Unterstrom;Oberstrom;Wasserspiegel;;;;;;;4
+Gold;A;4;113;20;Bestandteile PSA ;Stiefel*;Hose *;Jacke *;Handschuhe *;Helm *;Fleece-Jacke ;BaseCap ;Koppel ;;;;5
+Gold;A;4;114;21;Herstellen einer Schocklage;Mit dem verletzten gesprochen/betreut;Den verletzten hingelegt, Beine hoch gelagert*;Decke untergelegt;Den verletzten zugedeckt;Vitalzeichen geprüft*;;;;;;;3
+Gold;A;5;115;22;Einnorden der Karte ;Karte richtig eingeordnet*;;;;;;;;;;;1
+Gold;A;5;116;23;Anmelden in einem Sprechfunkverkehrskreis;Betriebskanal nachgefragt und richtig eingestellt*;;;;;;;;;;;3
+Gold;A;5;117;24;Absetzen einer Nachricht;Betriebskanal nachgefragt und richtig eingestellt*;Anruf richtig ausgeführt / Heros... von Heros... kommen*;Hier Heros ……….., Standortmeldung, Standort Bibergasse/Ecke Moorstraße, kommen (Antwort Gegenstelle: Verstanden, Ende)*;;;;;;;;;3
+Gold;B;1;118;1;Verbinden von zwei Leinen mit dem Sackstich;Sackstich korrekt *;Überhang mind. 10x Leinendurchmesser;Parallele Führung ;;;;;;;;;2
+Gold;B;1;119;2;Aufschießen einer Arbeitsleine;Freies Leinenende kürzer als normaler Schlag;Drallfrei ;Mit mindestens drei Schlägen quer umwickelt;Schläge eng und fest gewickelt;Überhang mind. 10x Leinendurchmesser;;;;;;;4
+Gold;B;1;120;3;Schnürbund ;Mastwurf am Tragholz ;Überhang 10-15cm ;Eng & fest ;Schläge nach außen ;Abschluss Mastwurf ;;;;;;;4
+Gold;B;1;121;4;Verbinden zweier Kettenenden mit einem Schäkel;Kettenstränge drallfrei ausgelegt*;Kettenenden mit Schäkel verbunden*;Schäkelbolzen vollständig eingedreht;Schäkelbolzen eine halbe umdrehung zurückgedreht*;Schäkelbolzen gegen herausdrehen gesichert*;Handschuhe getragen*;;;;;;5
+Gold;B;1;122;5;Bennenen der Bestandteile der PSA;Stiefel*;Hose *;Jacke *;Arbeitsschutzhandschuhe*;Schutzhelm*;Fleece-Jacke ;BaseCap ;Koppel ;;;;5
+Gold;B;1;123;6;Zuordnen von Löschmitteln;Holz - Wasser*;Metallspäne - Sand*;Kraftstoffe - ABC-Löschpulver;;;;;;;;;4
+Gold;B;2;124;7;Aufzählung möglicher Leitersicherungen;Kopfpunktsicherung / Querriegel;Fußpunktsicherung / 2. Junghelfer;Eingraben;Pfähle / Spitzeisen;Querriegel;;;;;;;4
+Gold;B;2;125;8;Besteigen einer Steckleiter;Anstellwinkel geprüft und ggf. korrigiert (65-75 grad) *;Stationshelfer_in zur Leistersicherung geholt*;An Sprossen festgehalten (nicht Holm)*;;;;;;;;;3
+Gold;B;2;126;9;Tragen einer Steckleiter auf der Schulter;Steckleiterteil liegt auf Schulter auf*;Steckleiterteil an Sprosse gehalten*;Zweite Hand bleibt frei *;;;;;;;;;3
+Gold;B;2;127;10;Einbindes zweier Bohlen auf ein Steckleiterteil;Schnürbund gewählt*;Stoßenden der Bohlen überlappen nicht*;Keine Lücken zwischen den zwei Bohlen;;;;;;;;;2
+Gold;B;3;128;11;Zuordnen von Dienststellungskennzeichen;Ortsbeauftragte_r ;Zugführer_in ;Gruppenführer_in ;Ortsjugendbeauftragter /Verwaltungsbeauftragter / Koch;Ausbildungsbeauftragte/r;Helfer_in ;;;;;;4
+Gold;B;3;129;12;Holz-Werkzeuge II ;Bügelsäge ;Fuchsschwanz ;Stichsäge ;Lochbeitel ;Handbeil ;Holzaxt ;Kistenbeitel ;Zugmesser ;;;;6
+Gold;B;3;130;13;Zeigen von Mess und Anreißwerkzeugen;Gliedermaßstab;Zimmermannswinkel;Bandmaß;Stellwinkel (Schmiege);Wasserwage;;;;;;;4
+Gold;B;3;131;14;Rechtwinkliges Ablängen eines Kantholzes mit dem Fuchsschwanz;Arbeitsschutzhandschuhe getragen *;Für den Anschnitt Führungsholz verwendet*;Sägeblattlänge voll ausgenutzt;Sägeschnitt gerade und rechtwinklig durchgeführt ;;;;;;;;3
+Gold;B;4;132;15;Bennenen verschiedener Baustoffe;Maueziegel;Kalksandstein;Porenbetonstein (Gasbeton);Leichtbetonstein oder Mehrkammerstein;;;;;;;;3
+Gold;B;4;133;16;Stein-Werkzeuge ;Maurerbeil ;Gipserbeil ;Handschutz ;Spitzmeißel ;Fäustel ;Kneifzange ;Rollgabelschlüssel ;Flachmeißel ;;;;6
+Gold;B;4;134;17;Erklären der Handhabung des ABC-Feuerlöschers;Sicherung entfernt *;Treibgasbehälter ausgelöst*;Brand gebückt angegangen*;Windrichtung/Abstand beachtet*;Löschstrahl in Flammen (nicht Rauch)*;Löschangriff mit kurzen Pulverstößen;;;;;;5
+Gold;B;4;135;18;Aufzählen der Hilfsmittel der Kartenkunde;Karte(n)*;Planzeiger;Kompass;GPS-Empfänger;;;;;;;;2
+Gold;B;4;136;19;Bestimmen eines Punktes durch Vorgabe (Koordinate);Punkt richtig bestimmt*;;;;;;;;;;;1
+Gold;B;5;137;20;Absetzen eines Notrufs;Wer meldet ;Wo*;Was*;Wie viele Verletzte ;Warten auf Rückfragen*;Welche Verletzungen ;;;;;;5
+Gold;B;5;138;21;Herstellen einer stabilen Seitenlage ;Seitenlage richtig durchgeführt*;Nicht über Verletzten gestiegen*;;;;;;;;;;2
+Gold;B;5;139;22;Druckverband ;Handschuhe getragen ;Wundauflage aufgelegt *;Mit 2-3 Gängen fixiert *;Druckpolster aufgelegt *;Weitere Gänge drüber *;Ende fixiert *;;;;;;5
+Gold;B;6;140;23;Strom & Licht ;Stativbeine gespreizt *;Leuchte aufgesteckt/ausgerichtet und gesichert*;Teleskoprohre auf maximale Höhe und gesichert*;Handschuhe getragen *;Stativ abgespannt *;Seile markiert mit Flatterband;Leitung geprüft ;Voll abgerollt *;Stolperfrei in Buchten *;Kappen verbunden ;Verbr. zu Erzeuger ;9
+Gold;B;6;141;24;Stromerzeuger ;Abgasschlauch dran*;Kraftstoff geprüft ;Ölstand geprüft ;Choke/Erklärung Start *;Kraftstoff Hahn offen*;Motor gestartet *;Last erst bei Nenndrehzahl *;Stecker verriegelt ;Reihenfolge korrekt *;;;7
+Gold;C;1;142;1;Herstellen eines Bockschnürbundes mit einer Arbeitsleine (kurz);"Am „tragenden“ Holz mit Mastwurf
+begonnen (bei Beginn mit Zopfende
+zusätzlicher Halbschlag ausgeführt)
+*";Leinenüberhang mind. 10 x Leinendurchmesser;Eng und fest gebunden*;Entgegen der Lastrichtung, d. h. nach oben gebunden*;Abschluss am waagerechten Holz mit Mastwurf (bei Abschluss mit Zopfende zusätzlichen Halbschlag ausgeführt);;;;;;;4
+Gold;C;1;143;2;Benennen der Bestandteile der persönlichen Schutzausstattung;Stiefel*;Hose *;Jacke *;Arbeitsschutzhandschuhe*;Schutzhelm*;Fleece-Jacke ;BaseCap ;Koppel ;;;;5
+Gold;C;1;144;3;Bestimmen eines Punktes durch Vorgabe einer Koordinate;Punkt richtig bestimmt*;;;;;;;;;;;1
+Gold;C;1;145;4;Umrechnen von Kartenmaßstäben;Umrechnen vom in der Karte angegebenen Abstand (in cm) in den realen Abstand im Gelände (in km);Umrechnen vom realen Abstand im Gelände (in km) in den Abstand in der Karte (in cm);;;;;;;;;;1
+Gold;C;1;146;5;Anmelden in einem Sprechfunkverkehrskreis;Betriebskanal nachgefragt und richtig eingestellt*;Leitstelle von HEROS ……….. kommen (Antwort Gegenstelle: Hier Heros Leitstelle, kommen)*;"Ich melde mich in Ihrem
+Funkverkehrskreis an, kommen
+(Antwort Gegenstelle: Verstanden,
+Ende)
+*";;;;;;;;;3
+Gold;C;1;147;6;Absetzen einer Nachricht;"Betriebskanal nachgefragt und
+richtig eingestellt*";HEROS ……….. von HEROS ……….. kommen (Antwort Gegenstelle: Hier Heros ……….., kommen)*;Hier Heros ……….., Standortmeldung, Standort Bibergasse/Ecke Moorstraße, kommen (Antwort Gegenstelle: Verstanden, Ende)*;;;;;;;;;3
+Gold;C;2;148;7;Erklären der Bestandteile einer Leiter;Holm*;Sprosse*;Kopfende*;Fußende*;Federspeerbolzen;;;;;;;4
+Gold;C;2;149;8;Zusammenstecken zweier Steckleiterteile;Arbeitsschutzhandschuhe getragen;Leiterteile ineinander geschoben*;"Vor der Zugprobe geprüft, dass die
+Federsperrbolzen geschlossen sind*";Zugprobe durchgeführt*;;;;;;;;3
+Gold;C;2;150;9;Benennen von Werkzeugen für die Holzbearbeitung;Zugmesser;Lochbeitel;Schreinerklüpfel;Halbrund-Raspel;Bohrsäge (Stichling);Stangen-Schlangenbohrer;Latthammer;Fuchsschwanz;Schlegel;;;7
+Gold;C;2;151;10;Einfaches Kreuzen zweier Kanthölzer durch Verbinden mittels Gewindestange;Löcher mittig angerissen*;Löcher rechtwinklig gebohrt*;"Kanthölzer mit Gewindestange
+verbunden *";Unterlegscheiben (quadratisch) verwendet*;Sechskantmuttern festgezogen;;;;;;;4
+Gold;C;2;152;11;Ablängen einer Gewindestange mit der Metallbügelsäge;Gewindestange mit Gewindeschutz im Schraubstock eingespannt*;Gewindestange auf Maß* abgelängt*;Schnitt rechtwinklig ausgeführt (Sichtkontrolle);Schnittfläche geebnet und entgratet*;Auf Gewindegängigkeit geprüft*;;;;;;;4
+Gold;C;3;153;12;Anlegen und Erklären der THW-Rettungsweste;Auf oberflächliche Beschädigungen überprüft*;Aufblasvorrichtung kontrolliert*;Handauslöseleine nach außen geführt*;THW-Rettungsweste korrekt angelegt und geschlossen*;;;;;;;;3
+Gold;C;3;154;13;Transportsicherung auf einer Krankentrage für den Transport auf unebenem Geländ;Hüft- und Brustgurt geschlossen*;Arbeitsleine mit Doppelstich verbunden*;Arbeitsleine kopfseitig mit Mastwurf und Halbschlag am Tragegriff und mit Halbschlag am Tragbein gesichert (beidseitig)*;Leinenführung nach Vorgabe fest am Körper*;Arbeitsleine fußseitig mit Halbschlag an den Tragegriffen und Tragbeinen gesichert (beidseitig)*;"Achterschlag an den Füßen korrekt
+ausgeführt*";Person in der Einbindungszeit betreut, Handgriffe erklärt und angesprochen*;;;;;7
+Gold;C;3;155;14;Anlegen eines Druckverbandes (mit Verbandspäckchen);Infektionsschutzhandschuhe getragen;Wundauflage auf Wunde gelegt*;Wundauflage mit 2 bis 3 kreisförmigen Bindegängen befestigt*;Druckpolster auf Wundbereich gelegt*;Weitere Bindegänge über das Druckpolster gelegt*;Das Bindenende fixiert*;;;;;;5
+Gold;C;4;156;15;Aufbau einer mobilen Stromversorgung mit Beleuchtung;Stativbeine maximal gespreizt, senkrecht/lotrecht ausgerichtet und Flügelschrauben angezogen*;Flutlichtleuchte aufgesteckt, ausgerichtet und gesichert*;Teleskoprohre (mit Stationshelfer_in) auf maximale Höhe herausgezogen und gesichert*;Beim Herausziehen der Teleskoprohre Arbeitsschutzhandschuhe getragen*;Stativ ordnungsgemäß (dreiseitig und einheitlich) abgespannt*;Abspannseile mit Absperrband (Flatterband) gekennzeichnet;Leitung auf Beschädigung geprüft;Leitung vollständig abgerollt*;Überschüssige Leitung in großen Buchten stolperfrei verlegt*;Schutzdeckel und Schutzkappen verbunden;Vom Verbraucher zum Erzeuger aufgebaut;9
+Gold;C;4;157;16;Erläutern der Inbetriebnahme eines tragbaren Stromerzeugers;Abgasschlauch angeschlossen*;Kraftstofffüllstand geprüft;Ölstand überprüft;Choke herausgezogen (bei warmen Motor nur erklären)*;Kraftstoffhahn geöffnet*;Motor gestartet*;Verbraucher erst angeschlossen, wenn der Motor mit Nenndrehzahl läuft*;Überwurfringglocke der Anschlussleitung an der Steckdose des tragbaren Stromerzeugers verriegelt;"Die Reihenfolge der
+Bedienungsschritte ist eingehalten
+(Ausnahme: Reihenfolge der
+Überprüfung Kraftstoff und
+Ölstand).
+*";;;7
+Gold;C;4;158;17;Inbetriebnahme einer Tauchpumpe;"Tauchpumpe mit Arbeitsleine durch
+einfachen Ankerstich gesichert*";Druckschlauch angekuppelt und Ende festgelegt in einer Schlauchbrücke bei freiem Auslauf*;"Elektrische Verbindung hergestellt
+und Pumpe eingeschaltet";"Pumpe an der Arbeitsleine in das
+Wasser gelassen *";;;;;;;;4
+Gold;C;5;159;18;Verbinden zweier Kettenenden mit einem Schäkel;Kettenstränge drallfrei ausgelegt*;Kettenenden mit Schäkel verbunden*;Schäkelbolzen vollständig eingedreht;Schäkelbolzen eine halbe umdrehung zurückgedreht*;Schäkelbolzen gegen herausdrehen gesichert*;Arbeitsschutzhandschuhe*;;;;;;5
+Gold;C;5;160;19;Zuggerät Inbetr. ;Handschuhe getragen*;An Festpunkt *;Schaltgriff eingerastet ;Rückzughebel hinten ;Seil eingeführt *;Schaltgriff gelöst ;Sicherheitsabstand *;Anschläge gesichert *;Hebelrohr gesichert *;Hebelrohr aufgesteckt und gesichert;;8
+Gold;C;;161;20;Außerbetriebnahme eines Zuggeräts;Drahtseil entspannt*;Rückzughebel betätigt;Drahtseil u. Zughaken von den Verankerungen gelöst;Schaltgriff zurückgezogen und eingerastet*;Drahtzugseil herausgezogen;Schaltgriff gelöst ;;;;;;4
+Gold;C;6;162;21;Gefahrstoffe ;Kraftstoff (Kl. 3) ;Sauerstoff (2.2/5.1) ;Druckluft (Kl. 2.2) ;Ameisensäure (Kl. 8) ;;;;;;;;3
+Gold;C;6;163;22;Sandsäcke ;2/3 gefüllt (max 12kg) und zugebunden*;Flach gelegt ;Öffnung landwärts ;Dichter Verbund ;;;;;;;;3
+Gold;C;6;164;23;Zuordnen von Löschmitteln;Elektroanlagen - Kohlendioxidlöscher*;Holz - Wasser*;Metallspäne - Sand*;Kraftstoffe - ABC Pulverlöscher*;;;;;;;;4
+Gold;C;6;165;24;Auffanggurt ;Taschen leer *;Sichtprüfung Gurt *;An Rückenöse gefasst ;Wie Jacke angelegt ;Beinriemen zu *;Brustgurt zu *;Hüftgurt zu *;Kontrolle Helfer *;Sitzprobe/Zugtest *;;;7

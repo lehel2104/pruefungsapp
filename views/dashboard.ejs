@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>THW LAZ Dashboard</title>
+    <meta http-equiv="refresh" content="5"> 
+    <style>
+        :root { 
+            --bg-dark: #0f172a; 
+            --card-bg: #1e293b;
+            --thw-blue: #003399;
+            --accent-frei: #10b981; 
+            --accent-besetzt: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body { 
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 30px; 
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 20px;
+        }
+
+        h1 { 
+            grid-column: 2;
+            font-size: 2rem; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .live-indicator {
+            justify-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .status-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--accent-frei);
+            font-weight: bold;
+        }
+
+        .stats-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .clock-container {
+            justify-self: end;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 8px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--accent-frei);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .station-card { 
+            background: var(--card-bg);
+            border-radius: 12px; 
+            padding: 20px;
+            position: relative;
+            border-left: 6px solid #444;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .station-card.frei { border-left-color: var(--accent-frei); }
+        .station-card.besetzt { border-left-color: var(--accent-besetzt); }
+
+        .station-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .station-name { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: white;
+        }
+
+        .status-pill {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 800;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .frei .status-pill { color: var(--accent-frei); }
+        .besetzt .status-pill { color: var(--accent-besetzt); }
+
+        .content {
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .person-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .aufgabe-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.2;
+        }
+
+        .empty-state {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .waiting-screen {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 100px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            border: 2px dashed rgba(255,255,255,0.1);
+        }
+
+        .footer-info { 
+            margin-top: 40px; 
+            color: var(--text-muted); 
+            font-size: 0.8rem; 
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="live-indicator">
+            <div class="status-top">
+                <span class="dot"></span> LIVE SYSTEM
+            </div>
+            <% if (typeof pruefungGestartet !== 'undefined' && pruefungGestartet) { %>
+                <div class="stats-sub">
+                    Belegt: <%= Object.values(stationsStatus).filter(s => s.status === 'BESETZT').length %> / Gesamt: <%= Object.keys(stationsStatus).length %>
+                </div>
+            <% } %>
+        </div>
+        
+        <h1>Leistungsabzeichen-Monitor</h1>
+
+        <div class="clock-container" id="digital-clock">
+            --:--:--
+        </div>
+    </header>
+
+    <div class="container">
+        <% if (typeof pruefungGestartet === 'undefined' || !pruefungGestartet) { %>
+            <div class="waiting-screen">
+                <h2 style="font-size: 2rem; color: var(--text-muted);">Bereit zum Start</h2>
+                <p style="font-size: 1.1rem; color: #64748b;">Warte auf Freigabe durch die Prüfungsleitung...</p>
+            </div>
+        <% } else { %>
+            <% 
+                if (typeof valideStationen === 'undefined') { var valideStationen = Object.keys(stationsStatus); }
+                
+                const sortedKeys = Object.keys(stationsStatus).sort((a, b) => {
+                    if(a === "Theorie") return 1;
+                    if(b === "Theorie") return -1;
+                    return parseInt(a) - parseInt(b);
+                });
+
+                sortedKeys.forEach(sID => { 
+                    if (valideStationen.includes(sID)) {
+                        let info = stationsStatus[sID]; 
+                        let statusClass = info.status.toLowerCase();
+            %>
+                <div class="station-card <%= statusClass %>">
+                    <div class="station-header">
+                        <div class="station-name">Station <%= sID %></div>
+                        <div class="status-pill"><%= info.status %></div>
+                    </div>
+                    
+                    <div class="content">
+                        <% if (info.status === 'BESETZT') { %>
+                            <div class="person-name"><%= info.person %></div>
+                            <div class="aufgabe-name"><%= info.aufgabe %></div>
+                        <% } else { %>
+                            <div class="empty-state">Bereit / Frei</div>
+                        <% } %>
+                    </div>
+                </div>
+            <% 
+                    }
+                }); 
+            %>
+        <% } %>
+    </div>
+
+    <p class="footer-info">THW Prüfungs-App &bull; Refresh alle 5s &bull; Version 2.2</p>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('de-DE', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            document.getElementById('digital-clock').textContent = timeString;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

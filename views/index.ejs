@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>THW-Jugend Leistungsabzeichen | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/favicon.ico" type="image/x-icon">
+    <style>
+        /* WICHTIGSTE ÄNDERUNG: Verhindert das Rausragen von Elementen */
+        * {
+            box-sizing: border-box;
+        }
+
+        :root { 
+            /* Slate Deep Palette */
+            --bg-deep: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --border: #334155;
+            
+            --thw-blue: #2563eb; 
+            --thw-yellow: #fbbf24; 
+            --success: #10b981; 
+            --danger: #ef4444; 
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: var(--bg-deep); 
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: var(--bg-card);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+.logo-box {
+    width: 40px;      /* Oder die Größe, die du wünschst */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Verhindert, dass das Bild übersteht */
+}
+
+        .live-indicator {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; }
+
+        /* Button Navigation */
+        .btn-group { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+        
+        .btn { 
+            padding: 10px 16px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            text-decoration: none;
+            color: var(--text-main);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover { background: var(--bg-input); transform: translateY(-2px); }
+        .btn-blue { background: var(--thw-blue); border-color: var(--thw-blue); }
+        .btn-yellow { background: var(--thw-yellow); color: var(--bg-deep); border-color: var(--thw-yellow); }
+        .btn-green { background: var(--success); border-color: var(--success); }
+
+        /* Dashboard Grid */
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            align-items: start;
+        }
+
+        @media (min-width: 1100px) {
+            .dashboard-grid { grid-template-columns: 350px 1fr; }
+        }
+
+        /* Cards */
+        .card { 
+            background: var(--bg-card); 
+            padding: 24px; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow); 
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            overflow: hidden; /* Verhindert Inhalts-Überlauf */
+        }
+
+        .card h3 { 
+            margin-top: 0; 
+            font-size: 1.1rem; 
+            color: var(--thw-yellow); 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Forms */
+        input, select { 
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            padding: 12px; 
+            border-radius: 8px; 
+            color: var(--text-main);
+            width: 100%; 
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--thw-blue); }
+
+        .setup-box { 
+            background: rgba(0,0,0,0.2); 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+
+        /* Tables */
+        .table-container { 
+            background: var(--bg-card); 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow); 
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { 
+            background: rgba(0,0,0,0.2); 
+            padding: 15px 20px; 
+            text-align: left; 
+            font-size: 0.75rem; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+        td { padding: 16px 20px; border-top: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* Badges & Pills */
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; }
+        .status-bestanden { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-nicht_bestanden { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .id-pill { background: var(--bg-input); padding: 3px 8px; border-radius: 4px; font-family: monospace; color: var(--thw-blue); }
+
+        .pulse {
+            width: 8px; height: 8px; background: var(--success); border-radius: 50%;
+            display: inline-block;
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.6); } 70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0px rgba(16, 185, 129, 0); } }
+
+        /* Search input specific */
+        .search-wrapper { position: relative; width: 280px; }
+        .search-wrapper i { position: absolute; left: 12px; top: 13px; color: var(--text-muted); }
+        .search-wrapper input { padding-left: 35px; margin-bottom: 0; background: var(--bg-card); }
+
+        /* Optimierter Import-Dropzone-Stil */
+        .import-label {
+            width: 100%; 
+            border: 2px dashed var(--border); 
+            padding: 30px 10px; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .import-label:hover {
+            border-color: var(--thw-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-logo">
+        <div class="logo-box">
+            <img src="/pictures/Logo.png" alt="Logo" style="height: 100%; width: auto; object-fit: contain;">
+        </div>
+        <h2 style="margin:0; font-size: 1rem; letter-spacing: 0.5px; color: var(--text-main);">
+            THW-Jugend <span style="font-weight:200; color: var(--text-muted);">Leistungsabzeichen</span>
+        </h2>
+    </div>
+    <div class="live-indicator">
+        <span class="pulse"></span> LIVE SYSTEM
+    </div>
+</nav>
+
+<div class="container">
+    
+    <div class="btn-group">
+        <a href="/dashboard" class="btn btn-blue" style="background: #172643;"><i class="fas fa-desktop"></i></a>
+        <a href="/admin-monitor" class="btn btn-blue" style="background: #172643;"><i class="fas fa-satellite-dish"></i></a> 
+        <a href="/admin/teilnehmer" class="btn btn-red" style="background: #172643;"><i class="fas fa-users"></i></a>
+        <a href="/admin/pruefer-liste" class="btn btn-red" style="background: #172643;"><i class="fas fa-id-card"></i></a>
+        <a href="/admin/konfiguration" class="btn btn-green" style="background: #172643;"><i class="fas fa-map-marked"></i></a>
+        <a href="/export-ergebnisse" class="btn btn-green" style="background: #172643;"><i class="fas fa-file-excel"></i></a>
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <div class="sidebar">
+            <% if (!pruefungGestartet) { %>
+<div class="card">
+    <h3><i class="fas fa-file-import"></i> 1. Import</h3>
+    <form action="/admin/upload-teilnehmer" method="POST" enctype="multipart/form-data" id="importForm">
+        <input type="file" name="csvfile" id="fileInput" style="display:none;" accept=".csv">
+        
+        <label for="fileInput" id="dropZone" class="import-label">
+            <i class="fas fa-cloud-upload-alt" id="importIcon" style="font-size: 2rem; color: var(--thw-blue); transition: all 0.3s;"></i>
+            <span id="fileNameDisplay" style="margin-top:10px; font-weight: 600; text-align: center;">CSV Teilnehmerliste hierher ziehen</span>
+            <small id="fileHint" style="color: var(--text-muted); margin-top: 5px;">oder klicken zum Auswählen</small>
+        </label>
+        
+        <button type="submit" id="uploadBtn" class="btn btn-blue" style="width:100%; margin-top:15px; display:none; justify-content:center; padding: 12px; animation: pulse-animation 2s infinite;">
+            <i class="fas fa-check-circle"></i> DATEI HOCHLADEN
+        </button>
+    </form>
+</div>
+
+<div class="card">
+    <h3><i class="fas fa-play-circle"></i> 2. Starten</h3>
+    <form action="/admin/start-pruefung" method="POST">
+        <% ['Blau', 'Orange', 'Bronze', 'Silber', 'Gold'].forEach(stufe => { %>
+            <div class="setup-box" style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:1rem; font-weight: bold; color: var(--thw-yellow);">
+                    <input type="checkbox" name="aktive_stufen" value="<%= stufe %>" checked 
+                           onchange="toggleRowEnable('<%= stufe %>', this.checked)" style="width:auto; margin:0"> 
+                    <%= stufe %>
+                </label>
+                
+                <div id="controls_<%= stufe %>" style="display: flex; gap: 10px; width: 100%;">
+                    <div style="flex: 1;">
+                        <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Theorie-Satz</small>
+                        <select name="<%= stufe %>_theorie_satz" class="theorie-select" data-stufe="<%= stufe %>" style="margin:0; font-size: 0.8rem;">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+
+                    <div style="flex: 1;">
+                        <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Praxis-Satz</small>
+                        <select name="<%= stufe %>_praxis_satz" style="margin:0; font-size: 0.8rem;">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        
+        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:15px; justify-content: center; padding: 15px; background: var(--thw-blue);">
+            Prüfung starten <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+        </button>
+    </form>
+</div>
+            <% } else { %>
+                <div class="card" style="border-left: 4px solid var(--success);">
+                    <h3 style="color: var(--success)"><i class="fas fa-running"></i> Aktiv</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Läuft für: <b><%= aktiveStufen.join(', ') %></b></p>
+                    <form action="/admin/reset-pruefung" method="POST" onsubmit="return confirm('Wirklich alles löschen?')">
+                        <button type="submit" class="btn" style="width:100%; color: var(--danger); border-color: var(--danger)">
+                            <i class="fas fa-power-off"></i> Reset System
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-user-plus"></i> Nachzügler</h3>
+                    <form action="/admin/add-teilnehmer-einzeln" method="POST">
+                        <input type="text" name="id" placeholder="ID (z.B. 101)" required>
+                        <select name="abzeichen">
+                            <% aktiveStufen.forEach(stufe => { %>
+                                <option value="<%= stufe %>"><%= stufe %></option>
+                            <% }) %>
+                        </select>
+                        <input type="text" name="vorname" placeholder="Vorname" required>
+                        <input type="text" name="name" placeholder="Nachname" required>
+                        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:5px; justify-content:center;">Hinzufügen</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="main-content">
+            <div class="table-container">
+                <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.1);">
+                    <h3 style="margin:0; font-size: 1rem;">Live-Ergebnisse</h3>
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="tableSearch" placeholder="Name oder ID suchen...">
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Teilnehmer</th>
+                                <th>Station</th>
+                                <th>Aufgaben</th>
+                                <th>Fehler</th>
+                                <th>Status</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+<tbody>
+    <% ergebnisse.forEach(e => { %>
+    <tr>
+        <td><span class="id-pill"><%= e.teilnehmer_id %></span></td>
+        <td><div style="font-weight: 600;"><%= e.vorname %> <%= e.name %></div></td>
+        <td style="color: var(--text-muted)">Station <%= e.station %></td>
+        
+        <td style="font-size: 0.85rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="<%= e.aufgabe_name %>">
+            <%= e.aufgabe_name || 'Theorie' %>
+        </td>
+
+        <td style="font-weight: 800; color: <%= e.fehler > 0 ? 'var(--danger)' : 'var(--success)' %>">
+            <%= e.fehler %>
+        </td>
+        <td>
+            <span class="badge status-<%= e.status %>">
+                <%= e.status.replace('_', ' ').toUpperCase() %>
+            </span>
+        </td>
+        <td>
+            <a href="/admin/delete-ergebnis/<%= e.id %>" style="color: var(--text-muted);" onclick="return confirm('Löschen?')">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        </td>
+    </tr>
+    <% }) %>
+</tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('tableSearch').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelector("#resultsTable tbody").rows;
+        for (let i = 0; i < rows.length; i++) {
+            let text = rows[i].textContent.toLowerCase();
+            rows[i].style.display = text.includes(filter) ? "" : "none";
+        }
+    });
+
+
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const fileHint = document.getElementById('fileHint');
+    const importIcon = document.getElementById('importIcon');
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    // Visuelles Feedback beim Drüberziehen
+    ['dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, e => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+
+    dropZone.addEventListener('dragover', () => {
+        dropZone.style.borderColor = 'var(--thw-yellow)';
+        dropZone.style.background = 'rgba(251, 191, 36, 0.1)';
+        importIcon.style.transform = 'scale(1.2)';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.borderColor = 'var(--border)';
+        dropZone.style.background = 'transparent';
+        importIcon.style.transform = 'scale(1)';
+    });
+
+    // Wenn Datei fallen gelassen oder ausgewählt wird
+    const handleFiles = (files) => {
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.name.endsWith('.csv')) {
+                // UI anpassen
+                fileNameDisplay.innerText = "Datei bereit: " + file.name;
+                fileNameDisplay.style.color = "var(--thw-yellow)";
+                fileHint.innerText = "Klicke auf den Button zum Starten";
+                importIcon.className = "fas fa-file-csv";
+                importIcon.style.color = "var(--success)";
+                
+                // Upload Button einblenden
+                uploadBtn.style.display = "flex";
+                dropZone.style.borderColor = "var(--success)";
+            } else {
+                alert("Bitte nur CSV-Dateien hochladen!");
+            }
+        }
+    };
+
+    dropZone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        fileInput.files = files; // Wichtig: Dateien dem Input zuweisen
+        handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', () => {
+        handleFiles(fileInput.files);
+    });
+    // 1. Filtert die Theorie-Optionen beim Laden der Seite
+document.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.theorie-select');
+    selects.forEach(select => {
+        const stufe = select.getAttribute('data-stufe').toLowerCase();
+        const options = select.options;
+        for (let i = 0; i < options.length; i++) {
+            const val = options[i].value;
+            let hidden = false;
+            
+            // Logik: Wer darf welchen Satz sehen?
+            if (stufe === 'orange' && !['A', 'B'].includes(val)) hidden = true;
+            if (stufe === 'blau' && !['A', 'B', 'C'].includes(val)) hidden = true;
+            if (stufe === 'gold' && val === 'E') hidden = true; // Gold hat nur A-D
+            
+            if (hidden) {
+                options[i].style.display = 'none';
+                options[i].disabled = true;
+            }
+        }
+    });
+});
+
+// 2. Aktiviert/Deaktiviert die Dropdowns beim Klicken auf die Checkbox
+function toggleRowEnable(stufe, isChecked) {
+    const container = document.getElementById('controls_' + stufe);
+    if(container) {
+        container.style.opacity = isChecked ? "1" : "0.3";
+        container.querySelectorAll('select').forEach(s => s.disabled = !isChecked);
+    }
+}
+</script>
+
+</body>
+</html>

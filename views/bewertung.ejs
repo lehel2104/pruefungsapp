@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Bewertung | THW</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0f172a;
+            --bg-card: #1e293b;
+            --thw-blue: #2563eb;
+            --thw-yellow: #fbbf24;
+            --success: #10b981; 
+            --danger: #ef4444; 
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            margin: 0; padding: 10px; padding-bottom: 110px;
+        }
+
+        .header-mini {
+            background: var(--bg-card);
+            padding: 15px; border-radius: 12px; margin-bottom: 15px;
+            border-bottom: 3px solid var(--thw-blue);
+        }
+
+        .header-mini h2 { margin: 0; font-size: 1rem; color: var(--thw-yellow); }
+
+        .evaluation-list { display: flex; flex-direction: column; gap: 8px; }
+
+        .check-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px; padding: 16px;
+            display: flex; align-items: center; gap: 15px;
+            transition: all 0.2s ease; cursor: pointer;
+        }
+
+        .check-circle {
+            width: 28px; height: 28px; border: 2px solid var(--border);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; background: var(--bg-deep);
+        }
+
+        .check-circle i { color: transparent; }
+
+        /* Wenn richtig gemacht -> GRÜN */
+        .check-card.is-checked {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .check-card.is-checked .check-circle {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .check-card.is-checked .check-circle i { color: white; }
+
+        .pflicht-star { color: var(--danger); font-weight: bold; margin-left: 4px; }
+
+        .bottom-action {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            padding: 15px 20px 25px;
+            background: linear-gradient(to top, var(--bg-deep) 80%, transparent);
+        }
+
+        .btn-save {
+            background: var(--danger);
+            color: white; border: none; width: 100%; padding: 18px;
+            border-radius: 14px; font-size: 1.1rem; font-weight: 800;
+            transition: background 0.3s;
+        }
+        
+        .hint-box {
+            text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-mini">
+        <h2><%= aufgabe.aufgabe_name %></h2>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+            Prüfling: <%= t.vorname %> <%= t.name %> (ID: <%= t.id %>)
+        </div>
+    </div>
+
+    <form action="/ergebnis-speichern" method="POST" id="evalForm">
+        <input type="hidden" name="id" value="<%= t.id %>">
+        <input type="hidden" name="station" value="<%= station %>">
+        <input type="hidden" name="aufgabe_id" value="<%= aufgabe.id %>">
+        <input type="hidden" name="status" id="statusField" value="nicht_bestanden">
+        <input type="hidden" name="fehler" id="fehlerField" value="0">
+
+        <div class="evaluation-list">
+            <% for(let i=1; i<=11; i++) { 
+                let f = aufgabe['f' + i];
+                if (f && f.trim() !== "" && f.trim() !== "-") { 
+                    let isPflicht = f.includes('*');
+                %>
+                <div class="check-card" onclick="toggleCheck(this)" data-pflicht="<%= isPflicht %>">
+                    <div class="check-circle">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <label style="flex:1">
+                        <%= f.replace('*', '') %>
+                        <% if(isPflicht) { %><span class="pflicht-star">*</span><% } %>
+                    </label>
+                </div>
+            <% } } %>
+        </div>
+
+<div class="hint-box">
+    <strong>Bestehenskriterien:</strong><br>
+    1. Alle Pflichtaufgaben <span class="pflicht-star">*</span> müssen erfüllt sein.<br>
+    2. Mindestens <strong><%= aufgabe.min_punkte %></strong> von insgesamt 
+    <strong><%= 
+        [1,2,3,4,5,6,7,8,9,10,11].filter(i => aufgabe['f'+i] && aufgabe['f'+i].trim() !== "" && aufgabe['f'+i].trim() !== "-").length 
+    %></strong> Aufgaben müssen erledigt sein.
+</div>
+
+        <div class="bottom-action">
+            <button type="submit" class="btn-save" id="submitBtn">
+                <i class="fas fa-times-circle"></i> PRÜFUNG LÄUFT...
+            </button>
+        </div>
+    </form>
+
+<script>
+    // Holen der Mindestpunkte aus dem EJS-Objekt der Aufgabe
+    const minSollPunkte = <%= aufgabe.min_punkte || 0 %>;
+
+    function toggleCheck(card) {
+        card.classList.toggle('is-checked');
+        // Haptisches Feedback für Mobilgeräte
+        if (navigator.vibrate) navigator.vibrate(30);
+        checkLogic();
+    }
+
+    function checkLogic() {
+        const allCards = document.querySelectorAll('.check-card');
+        const statusField = document.getElementById('statusField');
+        const fehlerField = document.getElementById('fehlerField');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        let pflichtFehler = 0;
+        let erledigtePunkte = 0;
+        let gesamtAnzahlFragen = allCards.length;
+
+        allCards.forEach(card => {
+            const isPflicht = card.dataset.pflicht === "true";
+            const isDone = card.classList.contains('is-checked');
+
+            if (isDone) {
+                erledigtePunkte++;
+            } else {
+                if (isPflicht) {
+                    pflichtFehler++;
+                }
+            }
+        });
+
+        // --- MACHER-LOGIK ---
+        // 1. Prio: pflichtFehler muss 0 sein
+        // 2. Prio: erledigtePunkte muss >= minSollPunkte sein
+        const bestanden = (pflichtFehler === 0 && erledigtePunkte >= minSollPunkte);
+        
+        // Wir speichern die Anzahl der fehlenden Aufgaben als Fehlerwert
+        fehlerField.value = gesamtAnzahlFragen - erledigtePunkte;
+
+        if (bestanden) {
+            statusField.value = "bestanden";
+            submitBtn.style.background = "var(--success)";
+            submitBtn.innerHTML = `<i class="fas fa-check-circle"></i> BESTANDEN (${erledigtePunkte}/${minSollPunkte} Pkt.)`;
+        } else {
+            statusField.value = "nicht_bestanden";
+            // Bei "Nicht Bestanden" färben wir den Button rot, damit der Prüfer es sofort sieht
+            submitBtn.style.background = "var(--danger)";
+            
+            if (pflichtFehler > 0) {
+                submitBtn.innerHTML = `<i class="fas fa-exclamation-triangle"></i> PFLICHTFEHLER (${pflichtFehler})`;
+            } else {
+                submitBtn.innerHTML = `<i class="fas fa-times-circle"></i> ZU WENIG PUNKTE (${erledigtePunkte}/${minSollPunkte})`;
+            }
+        }
+    }
+
+    // Initialer Check beim Laden der Seite
+    document.addEventListener('DOMContentLoaded', checkLogic);
+</script>
+</body>
+</html>

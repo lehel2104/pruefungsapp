@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | THW-Jugend LAZ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg-deep: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --thw-blue: #2563eb;
+            --thw-yellow: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Subtiles Hintergrund-Muster */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+.login-card {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid var(--border);
+    text-align: center;
+    /* Flexbox hinzufügen, um Kinder (wie die Logo-Box) zu zentrieren */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.login-card {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid var(--border);
+    text-align: center;
+    /* Flexbox hinzufügen, um Kinder (wie die Logo-Box) zu zentrieren */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.logo-box {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;    /* Vertikal im Container */
+    justify-content: center; /* Horizontal im Container */
+    margin: 0 auto 20px auto;/* "auto" links/rechts zentriert die Box selbst */
+    overflow: hidden;
+}
+
+.logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block; /* Entfernt den unteren Leerraum von Bildern */
+}
+
+        h2 {
+            margin: 0 0 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            margin-left: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 12px 12px 42px;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--thw-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        input:focus + i {
+            color: var(--thw-blue);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--thw-blue);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .footer-note {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-box">
+            <img src="/pictures/Logo.png" alt="Logo" style="height: 100%; width: auto; object-fit: contain;">
+        </div>
+        
+        <h2>Stations Login</h2>
+        <p>Bitte melden Sie sich an, um die Bewertung zu starten.</p>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label>Benutzerkennung</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user-tag"></i>
+                    <input type="text" name="id" placeholder="z.B. 1" required autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Passwort</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="passwort" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit">
+                <span>Einloggen</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+
+        <div class="footer-note">
+            THW-Jugend Leistungsabzeich • THW-Jugend Bensheim
+        </div>
+    </div>
+
+</body>
+</html>

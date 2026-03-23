@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planung | THW-Jugend LAZ Admin</title>
+    <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            /* Matte Blau-Grau Palette */
+            --bg-deep: #0f172a;       /* Sehr dunkles Blau-Grau */
+            --bg-card: #1e293b;       /* Etwas helleres Blau-Grau für Karten */
+            --bg-input: #334155;      /* Eingabefelder */
+            --border: #334155;
+            
+            --thw-blue: #2563eb;      /* Ein etwas leuchtenderes Blau für dunkle Hintergründe */
+            --thw-yellow: #fbbf24;    /* Warmes Gelb */
+            
+            --text-main: #f1f5f9;     /* Fast Weiß */
+            --text-muted: #94a3b8;    /* Sanftes Grau */
+            
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--thw-yellow); }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        /* Info Card - Matt & Dezent */
+        .info-card {
+            background: var(--bg-card);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--thw-blue);
+            margin-bottom: 32px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Station Block */
+        .station-group {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .station-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .station-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--thw-yellow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-info {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .login-badge {
+            background: var(--bg-input);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-left: 5px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 14px 24px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: rgba(255, 255, 255, 0.02); }
+
+        .satz-num {
+            font-weight: 700;
+            color: var(--thw-blue);
+        }
+
+        .aufgabe-name {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* Tags */
+        .tag-container { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            background: rgba(37, 99, 235, 0.15); /* Subtiles Blau */
+            color: #93c5fd;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        /* Number Input Modern */
+        .station-input {
+            width: 60px;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            color: var(--thw-yellow);
+            padding: 6px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .station-input:focus {
+            border-color: var(--thw-yellow);
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+        }
+
+        /* Theory Footer */
+        .theory-section {
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+            border: 1px dashed var(--border);
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        /* Animation für Updates */
+        .updating {
+            opacity: 0.3;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="back-link">
+        ← Zurück zur Admin Übersicht
+    </a>
+
+    <h1>Stationen & Aufgaben</h1>
+
+    <div class="info-card">
+        <div style="background: var(--thw-blue); width: 10px; height: 10px; border-radius: 50%;"></div>
+        <span>Um eine Aufgabe zu verschieben, ändere einfach die <strong>Stationsnummer</strong> in der rechten Spalte.</span>
+    </div>
+
+    <% Object.keys(stationsPlan).forEach(sID => { %>
+        <section class="station-group">
+            <div class="station-header">
+                <div class="station-title">
+                    Station <%= sID %>
+                </div>
+                <div class="login-info">
+                    ID: <span class="login-badge"><%= sID %></span>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Satz</th>
+                        <th>Aufgabe</th>
+                        <th>Abzeichen</th>
+                        <th style="width: 100px; text-align: center;">Station</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stationsPlan[sID].forEach(aufg => { %>
+                        <tr id="row-<%= aufg.id %>">
+                            <td><span class="satz-num"><%= aufg.satz %></span></td>
+                            <td><div class="aufgabe-name"><%= aufg.aufgabe_name %></div></td>
+                            <td>
+                                <div class="tag-container">
+                                    <% aufg.abzeichen.split(',').forEach(tag => { %>
+                                        <% if(aktiveStufen.includes(tag.trim())) { %>
+                                            <span class="tag"><%= tag.trim() %></span>
+                                        <% } %>
+                                    <% }) %>
+                                </div>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="number" 
+                                       class="station-input" 
+                                       value="<%= sID %>" 
+                                       onchange="moveAufgabe('<%= aufg.id %>', this.value)">
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    <% }) %>
+
+    <% if (aktiveStufen.length > 0) { %>
+        <div class="theory-section">
+            <span style="color: var(--text-muted)">Theorie-Prüfung (iPad Station)</span>
+            <div class="login-info">
+                Login: <span class="login-badge">theorie</span>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    function moveAufgabe(aufgabeId, neueStation) {
+        if (!neueStation || neueStation < 1) return;
+        
+        const row = document.getElementById(`row-${aufgabeId}`);
+        row.classList.add('updating');
+
+        fetch('/admin/update-aufgabe-station', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `aufgabe_id=${aufgabeId}&neue_station=${neueStation}`
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert("Fehler beim Verschieben.");
+                row.classList.remove('updating');
+            }
+        })
+        .catch(err => {
+            console.error("Netzwerkfehler:", err);
+            row.classList.remove('updating');
+        });
+    }
+</script>
+
+</body>
+</html>

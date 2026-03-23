@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theorieprüfung | THW Slate</title>
+    <link rel="stylesheet" href="/css/style.css"> 
+    <style>
+        :root { --thw-blue: #003399; --thw-yellow: #FFCC00; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { background: var(--card); padding: 25px; border-radius: 12px; border-left: 6px solid var(--thw-yellow); margin-bottom: 30px; }
+        .question-card { background: var(--card); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #334155; }
+        .question-text { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; display: block; color: var(--thw-yellow); }
+        .option { display: block; background: #334155; padding: 15px; margin: 10px 0; border-radius: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+        .option:hover { background: #475569; border-color: var(--thw-yellow); }
+        input[type="checkbox"] { margin-right: 15px; transform: scale(1.5); accent-color: var(--thw-yellow); }
+        .btn-submit { background: #10b981; color: white; border: none; padding: 20px; width: 100%; border-radius: 12px; font-size: 1.3rem; font-weight: 800; cursor: pointer; margin-top: 30px; text-transform: uppercase; }
+        .btn-submit:hover { background: #059669; transform: translateY(-2px); }
+    </style>
+    <script>
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Theorieprüfung</h1>
+            <p>Teilnehmer: <strong><%= t.vorname %> <%= t.name %></strong> (#<%= t.id %>)</p>
+            <p>Stufe: <strong><%= t.abzeichen %></strong> | Satz: <strong><%= (typeof thSatz !== 'undefined') ? thSatz : 'A' %></strong></p>
+        </div>
+
+        <form action="/theorie-speichern" method="POST" id="theorieForm">
+            <input type="hidden" name="teilnehmer_id" value="<%= t.id %>">
+            
+            <% if (fragen && fragen.length > 0) { %>
+                <% fragen.forEach((f, index) => { %>
+                    <div class="question-card">
+                        <span class="question-text"><%= index + 1 %>. <%= f.frage %></span>
+                        
+                        <label class="option">
+                            <input type="checkbox" name="q_<%= f.id %>" value="1"> <%= f.a1 %>
+                        </label>
+                        
+                        <label class="option">
+                            <input type="checkbox" name="q_<%= f.id %>" value="2"> <%= f.a2 %>
+                        </label>
+                        
+                        <label class="option">
+                            <input type="checkbox" name="q_<%= f.id %>" value="3"> <%= f.a3 %>
+                        </label>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="question-card">
+                    <p>Keine Fragen gefunden.</p>
+                </div>
+            <% } %>
+
+            <input type="hidden" name="punkte" id="punkteInput" value="0">
+            <input type="hidden" name="details" id="detailsInput" value="">
+            
+            <button type="submit" class="btn-submit">Prüfung abschließen</button>
+        </form>
+    </div>
+
+<script>
+    const fragenLösungen = <%- JSON.stringify(fragen.map(f => ({ id: f.id, korrekt: f.loesungen }))) %>;
+    
+    document.getElementById('theorieForm').onsubmit = function(e) {
+        const prüferPasswort = prompt("Prüfungs-Abgabe: Bitte Prüfer-Passwort eingeben:");
+        
+        if (prüferPasswort !== "1234") {
+            alert("Falsches Passwort! Abgabe abgebrochen.");
+            e.preventDefault();
+            return false;
+        }
+
+        let gesamtPunkte = 0;
+        let antwortDetails = [];
+
+        fragenLösungen.forEach((f, index) => {
+            const korrekteAntworten = f.korrekt.split(',').sort();
+            const gewaehlt = Array.from(document.querySelectorAll(`input[name="q_${f.id}"]:checked`))
+                                 .map(cb => cb.value)
+                                 .sort();
+            
+            const istRichtig = korrekteAntworten.length === gewaehlt.length && 
+                               korrekteAntworten.every((val, i) => val === gewaehlt[i]);
+            
+            if (istRichtig) {
+                gesamtPunkte++;
+            }
+
+            antwortDetails.push({
+                n: index + 1,
+                r: istRichtig
+            });
+        });
+
+        document.getElementById('punkteInput').value = gesamtPunkte;
+        document.getElementById('detailsInput').value = JSON.stringify(antwortDetails);
+        
+        return confirm(`Passwort korrekt. Ergebnisse (${gesamtPunkte} Punkte) jetzt final speichern?`);
+    };
+</script>
+</body>
+</html>
