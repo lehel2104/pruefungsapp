@@ -95,6 +95,34 @@
 
         .card-header h1 { font-size: 1.25rem; margin: 0; color: var(--text-main); }
 
+        /* Suchfeld Styling */
+        .search-wrapper {
+            position: relative;
+            flex-grow: 1;
+            max-width: 350px;
+        }
+        .search-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--thw-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
         .table-responsive { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
         th {
@@ -178,7 +206,6 @@
 
         .id-label { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem; }
 
-        /* Modal Design */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -277,20 +304,26 @@
     </div>
 
     <div class="main-card">
-<div class="card-header">
-    <h1>Prüflinge & Fortschritt</h1>
-    <div style="display: flex; gap: 10px;">
-        <a href="/admin/export-alle-pdfs" class="btn" style="background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: rgba(16, 185, 129, 0.2);">
-            <i class="fas fa-file-archive"></i> Alle PDFs (ZIP)
-        </a>
+        <div class="card-header">
+            <h1>Prüflinge</h1>
+            
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Name oder ID suchen...">
+            </div>
 
-        <form action="/admin/reset-pruefung" method="POST" onsubmit="return confirm('ACHTUNG: Alle Prüfungsdaten unwiderruflich löschen?')">
-            <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i> Prüfungsdaten löschen
-            </button>
-        </form>
-    </div>
-</div>
+            <div style="display: flex; gap: 10px;">
+                <a href="/admin/export-alle-pdfs" class="btn" style="background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: rgba(16, 185, 129, 0.2);">
+                    <i class="fas fa-file-archive"></i> Alle PDFs (ZIP)
+                </a>
+
+                <form action="/admin/reset-pruefung" method="POST" onsubmit="return confirm('ACHTUNG: Alle Prüfungsdaten unwiderruflich löschen?')">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Löschen
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <div class="table-responsive">
             <table>
@@ -304,98 +337,93 @@
                         <th style="text-align: right;">Verwaltung</th>
                     </tr>
                 </thead>
-                <tbody>
-<% teilnehmer.forEach(t => { %>
-    <tr class="<%= t.istFertig ? 'row-fertig' : '' %>">
-        <td><span class="id-label">#<%= t.id %></span></td>
-        
-        <td>
-            <div style="font-weight: 700; color: var(--text-main);"><%= t.vorname %> <%= t.name %></div>
-            
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
-                Praxis: <span style="color: <%= t.anzahlBestanden >= t.mindestSoll ? 'var(--success)' : 'var(--danger)' %>">
-                    <%= t.anzahlBestanden %> von <%= t.mindestSoll %>
-                </span>
-            </div>
+                <tbody id="participantTable">
+                    <% teilnehmer.forEach(t => { %>
+                    <tr class="<%= t.istFertig ? 'row-fertig' : '' %>">
+                        <td><span class="id-label">#<%= t.id %></span></td>
+                        
+                        <td class="name-cell">
+                            <div style="font-weight: 700; color: var(--text-main);"><%= t.vorname %> <%= t.name %></div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
+                                Praxis: <span style="color: <%= t.anzahlBestanden >= t.mindestSoll ? 'var(--success)' : 'var(--danger)' %>">
+                                    <%= t.anzahlBestanden %> von <%= t.mindestSoll %>
+                                </span>
+                            </div>
 
-            <% if (t.istFertig) { %>
-                <div style="margin-top: 5px;">
-                    <% if (t.gesamtBestanden) { %>
-                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success);">
-                            <i class="fas fa-medal"></i> BESTANDEN
-                        </span>
-                    <% } else { %>
-                        <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger);">
-                            <i class="fas fa-times-circle"></i> n. best.
-                        </span>
-                    <% } %>
-                </div>
-            <% } %>
-        </td>
+                            <% if (t.istFertig) { %>
+                                <div style="margin-top: 5px;">
+                                    <% if (t.gesamtBestanden) { %>
+                                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success);">
+                                            <i class="fas fa-medal"></i> BESTANDEN
+                                        </span>
+                                    <% } else { %>
+                                        <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger);">
+                                            <i class="fas fa-times-circle"></i> n. best.
+                                        </span>
+                                    <% } %>
+                                </div>
+                            <% } %>
+                        </td>
 
-        <td><span class="badge"><%= t.abzeichen %></span></td>
+                        <td><span class="badge"><%= t.abzeichen %></span></td>
 
-        <td>
-            <div class="bubble-container">
-                <% 
-                    let thClass = "";
-                    if (t.hatTheorie) {
-                        thClass = (t.theorieBestanden) ? "theory active" : "failed";
-                    }
+                        <td>
+                            <div class="bubble-container">
+                                <% 
+                                    let thClass = "";
+                                    if (t.hatTheorie) {
+                                        thClass = (t.theorieBestanden) ? "theory active" : "failed";
+                                    }
 
-                    // Sicherer Transport der Theorie-Daten via Base64
-                    let thObj = [{ 
-                        name: 'Theorie-Test', 
-                        status: t.theorieBestanden ? 'bestanden' : (t.hatTheorie ? 'nicht_bestanden' : 'offen'), 
-                        fehler: t.anzahlTheoriePunkte || 0,
-                        liste: t.theorieDetails 
-                    }];
-                    let b64Th = Buffer.from(JSON.stringify(thObj)).toString('base64');
-                %>
-                <div class="bubble <%= thClass %>" 
-                     title="Theorie" 
-                     onclick="showStationDetails('Theorie', '<%= b64Th %>')">
-                    T
-                </div>
+                                    let thObj = [{ 
+                                        name: 'Theorie-Test', 
+                                        status: t.theorieBestanden ? 'bestanden' : (t.hatTheorie ? 'nicht_bestanden' : 'offen'), 
+                                        fehler: t.anzahlTheoriePunkte || 0,
+                                        liste: t.theorieDetails 
+                                    }];
+                                    let b64Th = Buffer.from(JSON.stringify(thObj)).toString('base64');
+                                %>
+                                <div class="bubble <%= thClass %>" 
+                                     title="Theorie" 
+                                     onclick="showStationDetails('Theorie', '<%= b64Th %>')">
+                                    T
+                                </div>
 
-                <% (t.stationenDetails || []).forEach(s => { %>
-                    <% 
-                        let sClass = s.erledigt ? (s.ergebnis === 'nicht_bestanden' ? 'failed' : 'done') : '';
-                        let b64S = Buffer.from(JSON.stringify(s.details || [])).toString('base64');
-                    %>
-                    <div class="bubble <%= sClass %>" 
-                         onclick="showStationDetails('Station <%= s.nummer %>', '<%= b64S %>')">
-                        S<%= s.nummer %>
-                    </div>
-                <% }) %>
-            </div>
-        </td>
+                                <% (t.stationenDetails || []).forEach(s => { %>
+                                    <% 
+                                        let sClass = s.erledigt ? (s.ergebnis === 'nicht_bestanden' ? 'failed' : 'done') : '';
+                                        let b64S = Buffer.from(JSON.stringify(s.details || [])).toString('base64');
+                                    %>
+                                    <div class="bubble <%= sClass %>" 
+                                         onclick="showStationDetails('Station <%= s.nummer %>', '<%= b64S %>')">
+                                        S<%= s.nummer %>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </td>
 
-        <td>
-            <% 
-                let prozent = (t.gesamtSoll > 0) ? Math.round((t.fortschritt / t.gesamtSoll) * 100) : 0;
-            %>
-            <div class="progress-wrapper">
-                <div class="progress-track">
-                    <div class="progress-fill" style="--w: <%= prozent %>%"></div>
-                </div>
-                <div class="progress-meta">
-                    <span><%= prozent %>%</span>
-                    <span><%= t.fortschritt %> / <%= t.gesamtSoll %></span>
-                </div>
-            </div>
-        </td>
-        <td style="text-align: right;">
-    <a href="/admin/export-pdf/<%= t.id %>" class="btn" style="background: rgba(251, 191, 36, 0.1); color: var(--thw-yellow); border-color: rgba(251, 191, 36, 0.2);" title="PDF Export">
-        <i class="fas fa-file-pdf"></i>
-    </a>
-
-            <a href="/admin/delete-teilnehmer/<%= t.id %>" class="btn btn-danger" onclick="return confirm('Teilnehmer löschen?')">
-                <i class="fas fa-user-minus"></i>
-            </a>
-        </td>
-    </tr>
-<% }) %>
+                        <td>
+                            <% let prozent = (t.gesamtSoll > 0) ? Math.round((t.fortschritt / t.gesamtSoll) * 100) : 0; %>
+                            <div class="progress-wrapper">
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="--w: <%= prozent %>%"></div>
+                                </div>
+                                <div class="progress-meta">
+                                    <span><%= prozent %>%</span>
+                                    <span><%= t.fortschritt %> / <%= t.gesamtSoll %></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <a href="/admin/export-pdf/<%= t.id %>" class="btn" style="background: rgba(251, 191, 36, 0.1); color: var(--thw-yellow); border-color: rgba(251, 191, 36, 0.2);" title="PDF Export">
+                                <i class="fas fa-file-pdf"></i>
+                            </a>
+                            <a href="/admin/delete-teilnehmer/<%= t.id %>" class="btn btn-danger" onclick="return confirm('Teilnehmer löschen?')">
+                                <i class="fas fa-user-minus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>
@@ -413,10 +441,24 @@
 </div>
 
 <script>
+// --- LIVE SUCHE FUNKTION ---
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#participantTable tr');
+
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        if (text.includes(filter)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+});
+
 function showStationDetails(title, b64Data) {
     let details;
     try {
-        // Base64 Dekodierung im Browser
         details = JSON.parse(atob(b64Data));
     } catch (e) {
         console.error("Fehler beim Laden der Details:", e);

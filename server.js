@@ -8,6 +8,7 @@ const { open } = require('sqlite');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const basicAuth = require('express-basic-auth');
 
 
 const app = express();
@@ -114,6 +115,21 @@ async function berechneTeilnehmerStatus(db, t, alleErgebnisse, alleAufgaben) {
                 ergebnis: hatFehler ? 'nicht_bestanden' : 'bestanden',
                 details: aufgabenDetails 
             });
+
+                // Durchschnittsberechnung
+    let gesamtProzent = 0;
+    if (teilnehmer.length > 0) {
+        const summe = teilnehmer.reduce((acc, t) => {
+            let prozent = (t.gesamtSoll > 0) ? (t.fortschritt / t.gesamtSoll) * 100 : 0;
+            return acc + prozent;
+        }, 0);
+        gesamtProzent = Math.round(summe / teilnehmer.length);
+    }
+
+    res.render('admin_management', { 
+        teilnehmer, 
+        gesamtFortschritt: gesamtProzent // Den Wert hier mitschicken
+    });
         });
 
         // 3. Theorie prüfen
@@ -181,6 +197,28 @@ async function berechneTeilnehmerStatus(db, t, alleErgebnisse, alleAufgaben) {
     }
 })();
 
+const authMiddleware = basicAuth({
+    users: { 'THW': 'thw' }, // Dein Passwort
+    challenge: true,
+    realm: 'THW Interner Bereich',
+    unauthorizedResponse: 'Zugriff verweigert.'
+});
+
+// --- SCHUTZ ANWENDEN ---
+
+// 1. Schützt exakt die Startseite (/)
+app.get('/', authMiddleware, (req, res, next) => {
+    // Falls du eine normale Route für '/' hast, wird diese hier "abgefangen"
+    // und nur nach Passwort-Eingabe weitergeleitet.
+    next(); 
+});
+
+// 2. Schützt alles, was mit /admin beginnt
+app.use('/admin', authMiddleware);
+
+// --- OFFENE ROUTEN (WICHTIG) ---
+// Alle anderen Routen (z.B. /start-aufgabe/:id) bleiben UNTERHALB 
+// dieser Definitionen und ohne 'authMiddleware', damit sie frei bleiben.
 // --- ROUTEN ---
 
 app.get('/', async (req, res) => {
@@ -428,6 +466,7 @@ app.get('/pruefen/:station_id/:id', async (req, res) => {
         } else res.send("Keine Aufgabe gefunden.");
     } catch (err) { res.status(500).send(err.message); }
 });
+
 
 app.post('/ergebnis-speichern', async (req, res) => {
     try {
@@ -690,12 +729,17 @@ app.get('/export-ergebnisse', async (req, res) => {
 
 // Reset
 app.post('/admin/reset-pruefung', async (req, res) => {
-    try {
-        await db.run('DELETE FROM ergebnisse');
-        await db.run('DELETE FROM teilnehmer');
-        // ... restlicher Reset Code (QR Ordner etc.)
-        res.redirect('/');
+   try {
+    await db.run('DELETE FROM ergebnisse');
+     await db.run('DELETE FROM teilnehmer');
+     const qrDir = './public/qrcodes';
+      if (fs.existsSync(qrDir)) {
+        fs.readdirSync(qrDir).forEach(f => fs.unlinkSync(`${qrDir}/${f}`));
+    }
+     stationsStatus = {};
+     pruefungGestartet = false;
+    res.redirect('/');
     } catch (err) {
-        res.status(500).send("Fehler beim Reset: " + err.message);
+      res.status(500).send("Fehler beim Reset: " + err.message);
     }
 });

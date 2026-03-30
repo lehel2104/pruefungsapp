@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theorie Anmeldung | THW Slate</title>
+    <title>Theorie Anmeldung | THW-Jugend</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/favicon.ico" type="image/x-icon">
     <style>
         :root {
             --thw-blue: #003399; /* Das offizielle THW-Blau */
@@ -123,22 +126,34 @@
             font-size: 0.75rem;
             color: #475569;
         }
+        .logo-box {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;    /* Vertikal im Container */
+            justify-content: center; /* Horizontal im Container */
+            margin: 0 auto 20px auto;/* "auto" links/rechts zentriert die Box selbst */
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
 
     <div class="login-card">
-        <h1>Theorie-Test</h1>
-        <p>Prüfungsportal der Basisausbildung</p>
+                <div class="logo-box">
+            <img src="/pictures/Logo.png" alt="Logo" style="height: 100%; width: auto; object-fit: contain;">
+        </div>
+        <h1>Theorie-Station</h1>
+        <p>Leistungsabzeichenportal</p>
         
         <form action="/theorie/anmelden" method="POST">
             <div class="input-group">
-                <label for="id-input">Teilnehmer-Identifikationsnummer</label>
+                <label for="id-input">Deine Teilnehmer-ID</label>
                 <input 
                     type="number" 
                     id="id-input"
                     name="teilnehmer_id" 
-                    placeholder="z.B. 101" 
+                    placeholder="z.B. 14" 
                     required 
                     autofocus
                 >
@@ -148,7 +163,7 @@
         </form>
 
         <div class="footer-note">
-            THW Slate &bull; Sicherer Prüfungsmodus
+            THW-Jugend Bensheim &bull; Theorie-Station
         </div>
     </div>
 

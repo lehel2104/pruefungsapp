@@ -57,38 +57,47 @@
                     <th>Aktion</th>
                 </tr>
             </thead>
-            <tbody>
-                <% accounts.forEach(a => { %>
-                <tr>
-                    <form action="/admin/update-pruefer" method="POST">
-                        <input type="hidden" name="station" value="<%= a.station %>">
-                        
-                        <td class="station-label">
-                            <i class="fas fa-desktop" style="color: #cbd5e1; margin-right: 5px;"></i> 
-                            <%= a.station %>
-                        </td>
-                        
-                        <td>
-                            <input type="text" name="anzeigename" value="<%= a.anzeigename %>" class="input-edit" placeholder="z.B. Prüfer Station <%= a.station %>">
-                        </td>
-                        
-                        <td>
-                            <input type="text" name="passwort" value="<%= a.passwort %>" class="input-edit" placeholder="Passwort">
-                        </td>
-                        
-                        <td>
-                            <span class="link-pill">/station/<%= a.station %></span>
-                        </td>
-                        
-                        <td>
-                            <button type="submit" class="btn btn-save">
-                                <i class="fas fa-save"></i> Speichern
-                            </button>
-                        </td>
-                    </form>
-                </tr>
-                <% }) %>
-            </tbody>
+<tbody>
+    <% accounts.forEach(a => { %>
+    <tr>
+        <form action="/admin/update-pruefer" method="POST" id="form-<%= a.station %>">
+            <input type="hidden" name="station" value="<%= a.station %>">
+            
+            <td class="station-label">
+                <i class="fas fa-desktop" style="color: #cbd5e1; margin-right: 5px;"></i> 
+                <%= a.station %>
+            </td>
+            
+            <td>
+                <input type="text" name="anzeigename" value="<%= a.anzeigename %>" class="input-edit">
+            </td>
+            
+            <td>
+                <input type="text" name="passwort" value="<%= a.passwort %>" class="input-edit">
+            </td>
+            
+            <td>
+                <span class="link-pill">/station/<%= a.station %></span>
+            </td>
+            
+            <td>
+                <div style="display: flex; gap: 8px;">
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i>
+                    </button>
+
+                    <a href="/admin/delete-pruefer/<%= a.station %>" 
+                       class="btn" 
+                       style="background: #fee2e2; color: #ef4444; border: 1px solid #fecaca;"
+                       onclick="return confirm('Möchtest du den Prüfer für Station <%= a.station %> wirklich löschen?')">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </td>
+        </form>
+    </tr>
+    <% }) %>
+</tbody>
         </table>
     </div>
 </body>
