@@ -250,99 +250,106 @@
         <a href="/admin/teilnehmer" class="btn btn-red" style="background: #172643;"><i class="fas fa-users"></i></a>
         <a href="/admin/pruefer-liste" class="btn btn-red" style="background: #172643;"><i class="fas fa-id-card"></i></a>
         <a href="/admin/konfiguration" class="btn btn-green" style="background: #172643;"><i class="fas fa-map-marked"></i></a>
-        <a href="/export-ergebnisse" class="btn btn-green" style="background: #172643;"><i class="fas fa-file-excel"></i></a>
+        <a href="/login" class="btn btn-green" style="background: #172643;"><i class="fas fa-file-excel"></i></a>
     </div>
 
     <div class="dashboard-grid">
         
-        <div class="sidebar">
-            <% if (!pruefungGestartet) { %>
-<div class="card">
-    <h3><i class="fas fa-file-import"></i> 1. Import</h3>
-    <form action="/admin/upload-teilnehmer" method="POST" enctype="multipart/form-data" id="importForm">
-        <input type="file" name="csvfile" id="fileInput" style="display:none;" accept=".csv">
-        
-        <label for="fileInput" id="dropZone" class="import-label">
-            <i class="fas fa-cloud-upload-alt" id="importIcon" style="font-size: 2rem; color: var(--thw-blue); transition: all 0.3s;"></i>
-            <span id="fileNameDisplay" style="margin-top:10px; font-weight: 600; text-align: center;">CSV Teilnehmerliste hierher ziehen</span>
-            <small id="fileHint" style="color: var(--text-muted); margin-top: 5px;">oder klicken zum Auswählen</small>
-        </label>
-        
-        <button type="submit" id="uploadBtn" class="btn btn-blue" style="width:100%; margin-top:15px; display:none; justify-content:center; padding: 12px; animation: pulse-animation 2s infinite;">
-            <i class="fas fa-check-circle"></i> DATEI HOCHLADEN
-        </button>
-    </form>
-</div>
-
-<div class="card">
-    <h3><i class="fas fa-play-circle"></i> 2. Starten</h3>
-    <form action="/admin/start-pruefung" method="POST">
-        <% ['Blau', 'Orange', 'Bronze', 'Silber', 'Gold'].forEach(stufe => { %>
-            <div class="setup-box" style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px;">
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:1rem; font-weight: bold; color: var(--thw-yellow);">
-                    <input type="checkbox" name="aktive_stufen" value="<%= stufe %>" checked 
-                           onchange="toggleRowEnable('<%= stufe %>', this.checked)" style="width:auto; margin:0"> 
-                    <%= stufe %>
+<div class="sidebar">
+    <% if (!pruefungGestartet) { %>
+        <div class="card">
+            <h3><i class="fas fa-file-import"></i> 1. Import</h3>
+            <form action="/admin/upload-teilnehmer" method="POST" enctype="multipart/form-data" id="importForm">
+                <input type="file" name="csvfile" id="fileInput" style="display:none;" accept=".csv">
+                <label for="fileInput" id="dropZone" class="import-label">
+                    <i class="fas fa-cloud-upload-alt" id="importIcon" style="font-size: 2rem; color: var(--thw-blue); transition: all 0.3s;"></i>
+                    <span id="fileNameDisplay" style="margin-top:10px; font-weight: 600; text-align: center;">CSV Teilnehmerliste hierher ziehen</span>
+                    <small id="fileHint" style="color: var(--text-muted); margin-top: 5px;">oder klicken zum Auswählen</small>
                 </label>
-                
-                <div id="controls_<%= stufe %>" style="display: flex; gap: 10px; width: 100%;">
-                    <div style="flex: 1;">
-                        <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Theorie-Satz</small>
-                        <select name="<%= stufe %>_theorie_satz" class="theorie-select" data-stufe="<%= stufe %>" style="margin:0; font-size: 0.8rem;">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                        </select>
-                    </div>
-
-                    <div style="flex: 1;">
-                        <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Praxis-Satz</small>
-                        <select name="<%= stufe %>_praxis_satz" style="margin:0; font-size: 0.8rem;">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        <% }) %>
-        
-        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:15px; justify-content: center; padding: 15px; background: var(--thw-blue);">
-            Prüfung starten <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
-        </button>
-    </form>
-</div>
-            <% } else { %>
-                <div class="card" style="border-left: 4px solid var(--success);">
-                    <h3 style="color: var(--success)"><i class="fas fa-running"></i> Aktiv</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Läuft für: <b><%= aktiveStufen.join(', ') %></b></p>
-                    <form action="/admin/reset-pruefung" method="POST" onsubmit="return confirm('Wirklich alles löschen?')">
-                        <button type="submit" class="btn" style="width:100%; color: var(--danger); border-color: var(--danger)">
-                            <i class="fas fa-power-off"></i> Reset System
-                        </button>
-                    </form>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-user-plus"></i> Nachzügler</h3>
-                    <form action="/admin/add-teilnehmer-einzeln" method="POST">
-                        <input type="text" name="id" placeholder="ID (z.B. 101)" required>
-                        <select name="abzeichen">
-                            <% aktiveStufen.forEach(stufe => { %>
-                                <option value="<%= stufe %>"><%= stufe %></option>
-                            <% }) %>
-                        </select>
-                        <input type="text" name="vorname" placeholder="Vorname" required>
-                        <input type="text" name="name" placeholder="Nachname" required>
-                        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:5px; justify-content:center;">Hinzufügen</button>
-                    </form>
-                </div>
-            <% } %>
+                <button type="submit" id="uploadBtn" class="btn btn-blue" style="width:100%; margin-top:15px; display:none; justify-content:center; padding: 12px; animation: pulse-animation 2s infinite;">
+                    <i class="fas fa-check-circle"></i> DATEI HOCHLADEN
+                </button>
+            </form>
         </div>
 
-        <div class="main-content">
+        <div class="card">
+            <h3><i class="fas fa-play-circle"></i> 2. Starten</h3>
+            <form action="/admin/start-pruefung" method="POST">
+                <% ['Blau', 'Orange', 'Bronze', 'Silber', 'Gold'].forEach(stufe => { %>
+                    <div class="setup-box" style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px;">
+                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:1rem; font-weight: bold; color: var(--thw-yellow);">
+                            <input type="checkbox" name="aktive_stufen" value="<%= stufe %>" checked 
+                                   onchange="toggleRowEnable('<%= stufe %>', this.checked)" style="width:auto; margin:0"> 
+                            <%= stufe %>
+                        </label>
+                        <div id="controls_<%= stufe %>" style="display: flex; gap: 10px; width: 100%;">
+                            <div style="flex: 1;">
+                                <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Theorie</small>
+                                <select name="<%= stufe %>_theorie_satz" class="theorie-select" data-stufe="<%= stufe %>" style="margin:0; font-size: 0.8rem;">
+                                    <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                                </select>
+                            </div>
+                            <div style="flex: 1;">
+                                <small style="color: var(--text-muted); display: block; margin-bottom: 4px;">Praxis</small>
+                                <select name="<%= stufe %>_praxis_satz" style="margin:0; font-size: 0.8rem;">
+                                    <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                <button type="submit" class="btn btn-blue" style="width:100%; margin-top:15px; justify-content: center; padding: 15px; background: var(--thw-blue);">
+                    Prüfung starten <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                </button>
+            </form>
+        </div>
+
+    <% } else { %>
+<div class="card" style="border-left: 4px solid var(--success);">
+    <h3 style="color: var(--success)"><i class="fas fa-running"></i> Aktiv</h3>
+    
+    <div style="margin-bottom: 15px;">
+        <p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-main);">Eingestellte Sätze:</p>
+        <% aktiveStufen.forEach(stufe => { 
+            const konfig = pruefungsKonfig[stufe];
+            const th = (konfig && typeof konfig === 'object') ? konfig.theorie : 'A';
+            const pr = (konfig && typeof konfig === 'object') ? konfig.praxis : (konfig || 'A');
+        %>
+            <div style="background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.8rem; border: 1px solid var(--border);">
+                <strong style="color: var(--thw-yellow);"><%= stufe %>:</strong> 
+                <span style="margin-left: 10px;">Theorie: <b><%= th %></b></span>
+                <span style="margin-left: 10px;">Praxis: <b><%= pr %></b></span>
+            </div>
+        <% }) %>
+    </div>
+
+    <form action="/admin/reset-pruefung" method="POST" onsubmit="return confirm('Wirklich alles löschen?')">
+        <button type="submit" class="btn" style="width:100%; color: var(--danger); border-color: var(--danger); justify-content: center;">
+            <i class="fas fa-power-off"></i> Reset System
+        </button>
+    </form>
+</div>
+
+        <div class="card">
+            <h3><i class="fas fa-user-plus"></i> Nachzügler</h3>
+            <form action="/admin/add-teilnehmer-einzeln" method="POST">
+                <input type="text" name="id" placeholder="ID (z.B. 101)" required>
+                <select name="abzeichen">
+                    <% aktiveStufen.forEach(stufe => { %>
+                        <option value="<%= stufe %>"><%= stufe %></option>
+                    <% }) %>
+                </select>
+                <input type="text" name="vorname" placeholder="Vorname" required>
+                <input type="text" name="name" placeholder="Nachname" required>
+                <input type="text" name="ov" placeholder="Ortsverband (OV)">
+                <input type="text" name="geburtsdatum" placeholder="Geburtsdatum (TT.MM.JJJJ)">
+                <button type="submit" class="btn btn-blue" style="width:100%; margin-top:10px; justify-content:center;">
+                    Hinzufügen
+                </button>
+            </form>
+        </div>
+    <% } %>
+</div> <div class="main-content">
             <div class="table-container">
                 <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.1);">
                     <h3 style="margin:0; font-size: 1rem;">Live-Ergebnisse</h3>

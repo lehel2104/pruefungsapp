@@ -21,6 +21,7 @@
     "html-pdf-node": "^1.0.8",
     "json2csv": "^6.0.0-alpha.2",
     "multer": "^2.1.1",
+    "pdf-lib": "^1.17.1",
     "qrcode": "^1.5.4",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"

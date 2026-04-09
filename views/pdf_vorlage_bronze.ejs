@@ -62,8 +62,8 @@
         <span class="abnahmestufe-wert">BRONZE</span>
         <div class="input-grid">
             <div class="input-field" style="flex: 2.5;"><%= t.vorname %> <%= t.name %><div class="label-sub">Vorname Nachname (JH)</div></div>
-            <div class="input-field"><div class="label-sub">Geburtsdatum</div></div>
-            <div class="input-field" style="flex: 1.5;"><div class="label-sub">Ortsjugend / Ortsverband</div></div>
+            <div class="input-field" style="flex: 2.5;"><%= t.geburtsdatum %><div class="label-sub">Geburtsdatum</div></div>
+            <div class="input-field" style="flex: 1.5;"><%= t.ov %><div class="label-sub">Ortsjugend / Ortsverband</div></div>
         </div>
     </div>
 
@@ -72,9 +72,9 @@
     <div class="section-header">
         <span class="underline">Theoretische Aufgaben</span>
         <div class="serie-container">
-            Serie: 
+            Theorie: 
             <% ['A','B','C','D','E'].forEach(s => { 
-                let isActive = (t.satz === s || t.satz === 'Satz ' + s);
+                let isActive = (t.theorie_satz === s || t.theorie_satz === 'Satz ' + s);
             %>
                 <div class="serie-box <%= isActive ? 'active-serie' : '' %>"><%= s %></div>
             <% }) %>
@@ -117,17 +117,17 @@
     <hr style="margin: 15px 0; border: 0; border-top: 1px solid #000;">
 
     <div class="section-hint">⇩ von der Abnahmekommission auszufüllen ⇩</div>
-    <div class="section-header">
-        <span class="underline">Praktische Aufgaben</span>
-<div style="display: flex; gap: 3px; margin-top: 5px;">
-    <span style="font-size: 0.7rem; color: var(--text-muted); margin-right: 5px;">Theorie:</span>
-    <% ['A', 'B', 'C'].forEach(buchstabe => { %>
-        <div class="serie-box <%= (t.theorie_satz === buchstabe) ? 'active-serie' : '' %>">
-            <%= buchstabe %>
-        </div>
-    <% }); %>
-</div>
+<div class="section-header">
+    <span class="section-title">Praktische Aufgaben</span>
+    <div style="display: flex; gap: 4px; align-items: center; font-weight: bold;">
+        Serie: 
+        <% ['A','B','C'].forEach(s => { 
+            let isActive = (t.praxis_satz === s || t.praxis_satz === 'Satz ' + s);
+        %>
+            <div class="serie-box <%= isActive ? 'active-serie' : '' %>"><%= s %></div>
+        <% }) %>
     </div>
+</div>
 
     <div style="display: flex; gap: 20px; margin-top: 5px; align-items: flex-start;">
         <table style="width: 420px;">

@@ -86,12 +86,12 @@
 </head>
 <body>
 
-    <div class="header-mini">
-        <h2><%= aufgabe.aufgabe_name %></h2>
-        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
-            Prüfling: <%= t.vorname %> <%= t.name %> (ID: <%= t.id %>)
-        </div>
+<div class="header-mini">
+    <h2><%= aufgabe.aufgabe_name %> (Satz <%= aufgabe.satz %>)</h2>
+    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+        Prüfling: <%= t.vorname %> <%= t.name %> (ID: <%= t.id %>) Abzeichen: <%= t.abzeichen %>
     </div>
+</div>
 
     <form action="/ergebnis-speichern" method="POST" id="evalForm">
         <input type="hidden" name="id" value="<%= t.id %>">

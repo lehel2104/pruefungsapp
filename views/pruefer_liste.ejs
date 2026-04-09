@@ -2,103 +2,223 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prüfer-Verwaltung | THW LAZ</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f0f2f5; padding: 30px; }
-        .card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        h1 { color: #003399; margin: 0; font-size: 1.5rem; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; padding: 12px; background: #f8f9fa; color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        td { padding: 12px; border-top: 1px solid #eee; vertical-align: middle; }
-        
-        .input-edit { 
-            padding: 8px 12px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            width: 180px; 
-            font-family: inherit;
-            font-size: 0.9rem;
-            outline: none;
+        :root {
+            --thw-blue: #003399;
+            --thw-blue-light: #0044cc;
+            --bg-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --success: #10b981;
         }
-        .input-edit:focus { border-color: #003399; box-shadow: 0 0 0 2px rgba(0,51,153,0.1); }
 
-        .btn { padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; }
-        .btn-green { background: #2ecc71; color: white; }
-        .btn-blue { background: #003399; color: white; }
-        .btn-save { background: #f0f4ff; color: #003399; border: 1px solid #003399; }
-        .btn-save:hover { background: #003399; color: white; }
-        
-        .link-pill { background: #f1f5f9; padding: 4px 8px; border-radius: 6px; font-family: monospace; font-size: 0.75rem; color: #64748b; }
-        
-        .station-label { font-weight: 800; color: #1e293b; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-gray); 
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px; 
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Zurück-Button Styling */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+        .btn-back:hover { color: var(--thw-blue); }
+
+        .card { 
+            background: white; 
+            padding: 32px; 
+            border-radius: 20px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        h1 { 
+            color: var(--thw-blue); 
+            margin: 0 0 8px 0; 
+            font-size: 1.75rem; 
+            font-weight: 800;
+        }
+
+        .btn { 
+            padding: 10px 20px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            border: none; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-size: 0.9rem; 
+        }
+
+        .btn-blue { background: var(--thw-blue); color: white; }
+        .btn-blue:hover { background: var(--thw-blue-light); transform: translateY(-1px); }
+
+        .btn-green { background: var(--success); color: white; }
+        .btn-green:hover { opacity: 0.9; }
+
+        .btn-outline-danger { 
+            background: #fff; 
+            color: var(--danger); 
+            border: 1.5px solid #fee2e2; 
+        }
+        .btn-outline-danger:hover { background: #fef2f2; border-color: var(--danger); }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { 
+            text-align: left; 
+            padding: 16px; 
+            background: #f8fafc; 
+            color: var(--text-muted); 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+        }
+        td { padding: 16px; border-top: 1px solid #f1f5f9; vertical-align: middle; }
+
+        .station-badge {
+            background: #e0e7ff;
+            color: var(--thw-blue);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-edit { 
+            padding: 10px 14px; 
+            border: 1.5px solid #e2e8f0; 
+            border-radius: 10px; 
+            width: 100%;
+            max-width: 200px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .input-edit:focus { 
+            border-color: var(--thw-blue); 
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,51,153,0.1); 
+        }
+
+        .link-pill { 
+            background: #f1f5f9; 
+            padding: 6px 10px; 
+            border-radius: 8px; 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+            border: 1px solid #e2e8f0;
+        }
+
+        .actions-cell { display: flex; gap: 10px; }
+
+        .save-btn {
+            background: #f0f4ff;
+            color: var(--thw-blue);
+            border: 1.5px solid #dbeafe;
+        }
+        .save-btn:hover { background: var(--thw-blue); color: white; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <h1><i class="fas fa-user-shield"></i> Prüfer-Accounts verwalten</h1>
-            <div style="display: flex; gap: 10px;">
-                <a href="/admin/export-pruefer" class="btn btn-green"><i class="fas fa-file-csv"></i> CSV Export</a>
-                <a href="/" class="btn btn-blue">Zurück</a>
-            </div>
-        </div>
-        
-        <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Hier kannst du die Anzeigenamen und Passwörter der Stationen ändern. Der Login erfolgt über die Station (z.B. "1") und das Passwort.</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Station</th>
-                    <th>Anzeigename (auf iPad)</th>
-                    <th>Passwort</th>
-                    <th>Link (QR-Ziel)</th>
-                    <th>Aktion</th>
-                </tr>
-            </thead>
-<tbody>
-    <% accounts.forEach(a => { %>
-    <tr>
-        <form action="/admin/update-pruefer" method="POST" id="form-<%= a.station %>">
-            <input type="hidden" name="station" value="<%= a.station %>">
-            
-            <td class="station-label">
-                <i class="fas fa-desktop" style="color: #cbd5e1; margin-right: 5px;"></i> 
-                <%= a.station %>
-            </td>
-            
-            <td>
-                <input type="text" name="anzeigename" value="<%= a.anzeigename %>" class="input-edit">
-            </td>
-            
-            <td>
-                <input type="text" name="passwort" value="<%= a.passwort %>" class="input-edit">
-            </td>
-            
-            <td>
-                <span class="link-pill">/station/<%= a.station %></span>
-            </td>
-            
-            <td>
-                <div style="display: flex; gap: 8px;">
-                    <button type="submit" class="btn btn-save">
-                        <i class="fas fa-save"></i>
-                    </button>
+    <div class="container">
+        <a href="/" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Zurück zum Dashboard
+        </a>
 
-                    <a href="/admin/delete-pruefer/<%= a.station %>" 
-                       class="btn" 
-                       style="background: #fee2e2; color: #ef4444; border: 1px solid #fecaca;"
-                       onclick="return confirm('Möchtest du den Prüfer für Station <%= a.station %> wirklich löschen?')">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                </div>
-            </td>
-        </form>
-    </tr>
-    <% }) %>
-</tbody>
-        </table>
+        <div class="card">
+<div class="header-section">
+    <div>
+        <h1><i class="fas fa-user-shield"></i> Prüfer-Accounts</h1>
+        <p style="color: var(--text-muted); margin: 0;">Stationen verwalten und Passwörter festlegen.</p>
     </div>
+    <div style="display: flex; gap: 10px;">
+        <a href="/admin/export-pruefer" class="btn btn-green">
+            <i class="fas fa-file-csv"></i> Liste exportieren
+        </a>
+    </div>
+</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Station</th>
+                        <th>Passwort</th>
+                        <th>Zugangs-Link</th>
+                        <th>Aktionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% accounts.forEach(a => { %>
+                    <tr>
+                        <td class="station-label">
+                            <span class="station-badge">
+                                <i class="fas fa-desktop"></i> <%= a.station %>
+                            </span>
+                        </td>
+                        
+                        <form action="/admin/update-pruefer" method="POST">
+                            <input type="hidden" name="station" value="<%= a.station %>">
+                            <td>
+                                <input type="text" name="passwort" value="<%= a.passwort %>" class="input-edit">
+                            </td>
+                            
+                            <td>
+                                <span class="link-pill">https://thw-jugend-laz.de/login</span>
+                            </td>
+                            
+                            <td class="actions-cell">
+                                <button type="submit" class="btn save-btn" title="Speichern">
+                                    <i class="fas fa-save"></i>
+                                </button>
+
+                                <a href="/admin/delete-pruefer/<%= a.station %>" 
+                                   class="btn btn-outline-danger" 
+                                   onclick="return confirm('Station <%= a.station %> wirklich löschen?')"
+                                   title="Löschen">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </form>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
 </html>

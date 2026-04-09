@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teilnehmer Management | THW Slate</title>
+    <title>Teilnehmer Management | Leistungsabzeichen</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+              <link rel="icon" type="image/png" href="/pictures/Logo.png">
+    <link rel="shortcut icon" href="/pictures/Logo.png" type="image/x-icon">
     <style>
         :root {
             --bg-deep: #0f172a;
@@ -279,7 +281,7 @@
 
 <div class="container">
     <a href="/" class="back-link">
-        <i class="fas fa-arrow-left"></i> &nbsp; Admin Zentrale
+        <i class="fas fa-arrow-left"></i> &nbsp; Prüfungs Dashboard
     </a>
 
     <div class="stats-grid">
@@ -312,6 +314,11 @@
                 <input type="text" id="searchInput" class="search-input" placeholder="Name oder ID suchen...">
             </div>
 
+          
+<a href="/admin/drucken-status-view" target="_blank" class="btn btn-blue" style="background: #172643;">
+    <i class="fas fa-print"></i> Alle Drucken (Live-Status)
+</a>
+
             <div style="display: flex; gap: 10px;">
                 <a href="/admin/export-alle-pdfs" class="btn" style="background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: rgba(16, 185, 129, 0.2);">
                     <i class="fas fa-file-archive"></i> Alle PDFs (ZIP)
@@ -331,6 +338,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>OV</th>
                         <th>Abzeichen</th>
                         <th>Status-Knoten</th>
                         <th>Fortschritt</th>
@@ -344,6 +352,11 @@
                         
                         <td class="name-cell">
                             <div style="font-weight: 700; color: var(--text-main);"><%= t.vorname %> <%= t.name %></div>
+                                                
+                                               <td class="ov-cell">
+                            <div style="font-weight: 700; color: var(--text-main);"><%= t.ov %></div> 
+                                                
+                                                
                             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
                                 Praxis: <span style="color: <%= t.anzahlBestanden >= t.mindestSoll ? 'var(--success)' : 'var(--danger)' %>">
                                     <%= t.anzahlBestanden %> von <%= t.mindestSoll %>

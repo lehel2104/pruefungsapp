@@ -17,6 +17,75 @@
         input[type="checkbox"] { margin-right: 15px; transform: scale(1.5); accent-color: var(--thw-yellow); }
         .btn-submit { background: #10b981; color: white; border: none; padding: 20px; width: 100%; border-radius: 12px; font-size: 1.3rem; font-weight: 800; cursor: pointer; margin-top: 30px; text-transform: uppercase; }
         .btn-submit:hover { background: #059669; transform: translateY(-2px); }
+
+
+
+        /* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background-color: var(--card);
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid var(--thw-blue);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.modal-content h2 { color: var(--thw-yellow); margin-bottom: 20px; }
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+.modal-content .btn-group { display: flex; gap: 10px; }
+.btn-modal { flex: 1; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+.btn-confirm { background: #10b981; color: white; }
+.btn-cancel { background: #334155; color: white; }
+
+
+.image-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f172a; /* Etwas dunklerer Hintergrund für Kontrast */
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+    min-height: 120px; /* Verhindert das "Springen" der Layout-Größe */
+}
+
+.image-option img {
+    /* DAS SIND DIE WICHTIGEN ZEILEN */
+    max-height: 150px;    /* Maximale Höhe (anpassen nach Geschmack) */
+    max-width: 100%;     /* Verhindert, dass das Bild seitlich rausragt */
+    width: auto;         /* Behält das Seitenverhältnis bei */
+    height: auto;
+    border-radius: 6px;
+    object-fit: contain; /* Sorgt dafür, dass das Bild in den Rahmen passt */
+    border: 2px solid transparent;
+}
+
+/* Wenn eine Option ausgewählt ist, soll das Bild einen gelben Rahmen bekommen */
+input[type="checkbox"]:checked + .image-option img,
+.option:hover img {
+    border-color: var(--thw-yellow);
+}
     </style>
     <script>
     window.onpageshow = function(event) {
@@ -39,21 +108,42 @@
             
             <% if (fragen && fragen.length > 0) { %>
                 <% fragen.forEach((f, index) => { %>
-                    <div class="question-card">
-                        <span class="question-text"><%= index + 1 %>. <%= f.frage %></span>
-                        
-                        <label class="option">
-                            <input type="checkbox" name="q_<%= f.id %>" value="1"> <%= f.a1 %>
-                        </label>
-                        
-                        <label class="option">
-                            <input type="checkbox" name="q_<%= f.id %>" value="2"> <%= f.a2 %>
-                        </label>
-                        
-                        <label class="option">
-                            <input type="checkbox" name="q_<%= f.id %>" value="3"> <%= f.a3 %>
-                        </label>
-                    </div>
+                  <div class="question-card">
+    <span class="question-text"><%= index + 1 %>. <%= f.frage %></span>
+    
+    <label class="option">
+        <input type="checkbox" name="q_<%= f.id %>" value="1"> 
+        <% if (f.a1 && f.a1.startsWith('Bild')) { %>
+            <div class="image-option">
+                <img src="/images/theorie/<%= f.a1.toLowerCase().replace(/ /g, '_') %>.png" alt="Option 1">
+            </div>
+        <% } else { %>
+            <%= f.a1 %>
+        <% } %>
+    </label>
+    
+    <label class="option">
+        <input type="checkbox" name="q_<%= f.id %>" value="2"> 
+        <% if (f.a2 && f.a2.startsWith('Bild')) { %>
+            <div class="image-option">
+                <img src="/images/theorie/<%= f.a2.toLowerCase().replace(/ /g, '_') %>.png" alt="Option 2">
+            </div>
+        <% } else { %>
+            <%= f.a2 %>
+        <% } %>
+    </label>
+    
+    <label class="option">
+        <input type="checkbox" name="q_<%= f.id %>" value="3"> 
+        <% if (f.a3 && f.a3.startsWith('Bild')) { %>
+            <div class="image-option">
+                <img src="/images/theorie/<%= f.a3.toLowerCase().replace(/ /g, '_') %>.png" alt="Option 3">
+            </div>
+        <% } else { %>
+            <%= f.a3 %>
+        <% } %>
+    </label>
+</div>
                 <% }) %>
             <% } else { %>
                 <div class="question-card">
@@ -68,18 +158,48 @@
         </form>
     </div>
 
+    <div id="pwModal" class="modal">
+    <div class="modal-content">
+        <h2>Prüfer-Freigabe</h2>
+        <p>Hier muss dein Prüfer sein Passwort eigeben:</p>
+        <input type="password" id="modalPwInput" placeholder="Passwort eingeben">
+        <div class="btn-group">
+            <button type="button" class="btn-modal btn-cancel" onclick="closeModal()">Abbrechen</button>
+            <button type="button" class="btn-modal btn-confirm" onclick="confirmSubmit()">Abgeben</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Daten vom Server übernehmen
     const fragenLösungen = <%- JSON.stringify(fragen.map(f => ({ id: f.id, korrekt: f.loesungen }))) %>;
-    
-    document.getElementById('theorieForm').onsubmit = function(e) {
-        const prüferPasswort = prompt("Prüfungs-Abgabe: Bitte Prüfer-Passwort eingeben:");
-        
-        if (prüferPasswort !== "1234") {
-            alert("Falsches Passwort! Abgabe abgebrochen.");
-            e.preventDefault();
-            return false;
+    const form = document.getElementById('theorieForm');
+    const modal = document.getElementById('pwModal');
+    const pwInput = document.getElementById('modalPwInput');
+
+    // 1. Wenn auf "Abschließen" geklickt wird: Modal öffnen statt absenden
+    form.onsubmit = function(e) {
+        e.preventDefault(); // Stoppt das normale Absenden
+        modal.style.display = "block";
+        pwInput.focus();
+    };
+
+    // Modal schließen
+    function closeModal() {
+        modal.style.display = "none";
+        pwInput.value = "";
+    }
+
+    // 2. Diese Funktion wird aufgerufen, wenn im Modal auf "Abgeben" geklickt wird
+    function confirmSubmit() {
+        // Passwort-Abfrage (Hier kannst du später eine Server-Abfrage machen)
+        if (pwInput.value !== "1234") {
+            alert("Falsches Passwort! Abgabe verweigert.");
+            pwInput.value = "";
+            return;
         }
 
+        // --- PUNKTBERECHNUNG START ---
         let gesamtPunkte = 0;
         let antwortDetails = [];
 
@@ -101,11 +221,19 @@
                 r: istRichtig
             });
         });
+        // --- PUNKTBERECHNUNG ENDE ---
 
+        // Werte in die versteckten Inputs schreiben
         document.getElementById('punkteInput').value = gesamtPunkte;
         document.getElementById('detailsInput').value = JSON.stringify(antwortDetails);
-        
-        return confirm(`Passwort korrekt. Ergebnisse (${gesamtPunkte} Punkte) jetzt final speichern?`);
+
+        // Formular endgültig absenden
+        form.submit();
+    }
+
+    // Schließen, wenn man außerhalb des Modals klickt
+    window.onclick = function(event) {
+        if (event.target == modal) closeModal();
     };
 </script>
 </body>
